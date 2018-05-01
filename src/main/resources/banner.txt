@@ -1,10 +1,10 @@
 
-  ${AnsiColor.GREEN}      ██╗${AnsiColor.RED} ██╗   ██╗ ████████╗ ███████╗   ██████╗ ████████╗ ████████╗ ███████╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ██║   ██║ ╚══██╔══╝ ██╔═══██╗ ██╔════╝ ╚══██╔══╝ ██╔═════╝ ██╔═══██╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ████████║    ██║    ███████╔╝ ╚█████╗     ██║    ██████╗   ███████╔╝
-  ${AnsiColor.GREEN}██╗   ██║${AnsiColor.RED} ██╔═══██║    ██║    ██╔════╝   ╚═══██╗    ██║    ██╔═══╝   ██╔══██║
-  ${AnsiColor.GREEN}╚██████╔╝${AnsiColor.RED} ██║   ██║ ████████╗ ██║       ██████╔╝    ██║    ████████╗ ██║  ╚██╗
-  ${AnsiColor.GREEN} ╚═════╝ ${AnsiColor.RED} ╚═╝   ╚═╝ ╚═══════╝ ╚═╝       ╚═════╝     ╚═╝    ╚═══════╝ ╚═╝   ╚═╝
-
-${AnsiColor.BRIGHT_BLUE}:: JHipster 🤓  :: Running Spring Boot ${spring-boot.version} ::
-:: http://www.jhipster.tech ::${AnsiColor.DEFAULT}
+  ${AnsiColor.GREEN} __  __      __  __      ______     ${AnsiColor.RED} __  __      __  __      ______
+  ${AnsiColor.GREEN}/\ \/\ \    /\ \/\ \    /\  _  \    ${AnsiColor.RED}/\ \/\ \    /\ \/\ \    /\  _  \
+  ${AnsiColor.GREEN}\ \ \_\ \   \ \ \ \ \   \ \ \L\ \   ${AnsiColor.RED}\ \ \_\ \   \ \ \ \ \   \ \ \L\ \
+  ${AnsiColor.GREEN} \ \  _  \   \ \ \ \ \   \ \  __ \  ${AnsiColor.RED} \ \  _  \   \ \ \ \ \   \ \  __ \
+  ${AnsiColor.GREEN}  \ \ \ \ \   \ \ \_\ \   \ \ \/\ \ ${AnsiColor.RED}  \ \ \ \ \   \ \ \_\ \   \ \ \/\ \
+  ${AnsiColor.GREEN}   \ \_\ \_\   \ \_____\   \ \_\ \_\${AnsiColor.RED}   \ \_\ \_\   \ \_____\   \ \_\ \_\
+  ${AnsiColor.GREEN}    \/_/\/_/    \/_____/    \/_/\/_/${AnsiColor.RED}    \/_/\/_/    \/_____/    \/_/\/_/
+${AnsiColor.BRIGHT_BLUE}:: HuaHua 🤓  :: Running Spring Boot ${spring-boot.version} ::
+:: http://www.huahua.com ::${AnsiColor.DEFAULT}

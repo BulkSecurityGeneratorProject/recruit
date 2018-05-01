@@ -1,0 +1,62 @@
+entity Position {
+   name String //名称
+   describe String //描述
+   place String //工作地点
+   experience String //经验
+   education String //学历
+   salary String //薪资
+   type PositionType //职位类型
+   order Long //排序
+}
+enum PositionType {
+   COMPUTER,INTERNET,MEDICAL,REALTY,AD,OTHER
+}
+enum CompanyType {
+   COMPUTER,INTERNET,MEDICAL,REALTY,AD,OTHER
+}
+entity Company {
+   name String //名称
+   financing Boolean //是否融资
+   personNumber String //公司人数
+   abstract String //简介
+   address String //地址
+   userId Long //关联注册用户
+   type CompanyType //公司类型
+   order Long //排序
+}
+entity Resume{
+   name String //姓名
+   sex String //性别
+   birth Instant //生日
+   email String //邮箱
+   wechat String //微信
+   state String //当前状态
+   advantage String //我的优势描述
+   place String //目标工作地点
+   workTime Instant //开始工作时间
+   experience String //工作经验
+   undergo String //工作经历描述（项目经验描述）
+   education String //最高学历
+   salary String //目标薪资
+   position String //目标岗位
+   userId Long //关联注册用户
+   enclosure String //附件简历
+}
+
+relationship OneToMany {
+    Company{position} to Position{company}
+}
+relationship ManyToMany {
+	Resume{position} to Position{resume}
+}
+// Set pagination options
+paginate * with pagination
+
+// Set dto options
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+
+

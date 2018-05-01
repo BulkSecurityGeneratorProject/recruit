@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Recruit",
+        "title": "招聘系统",
         "browsehappy": "您目前使用<strong>过于老旧</strong>的浏览器, 建议您<a href=\"http://browsehappy.com/?locale=en\">升级浏览器</a>让您有更佳的上网体验.",
         "menu": {
             "home": "首页",
@@ -38,6 +38,8 @@
             "username.placeholder": "您的账号",
             "newpassword": "新密码",
             "newpassword.placeholder": "您的新密码",
+            "company":"企业？",
+            "company.placeholder":"企业？",
             "confirmpassword": "新密码确认",
             "confirmpassword.placeholder": "确认您的新密码",
             "email": "电子邮件",

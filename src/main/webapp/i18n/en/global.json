@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Recruit",
+        "title": "Recruit System",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
@@ -38,6 +38,8 @@
             "username.placeholder": "Your username",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
+            "company":"Is Company?",
+            "company.placeholder":"Is Company?",
             "confirmpassword": "New password confirmation",
             "confirmpassword.placeholder": "Confirm the new password",
             "email": "Email",

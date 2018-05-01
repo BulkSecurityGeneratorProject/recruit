@@ -15,7 +15,6 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,

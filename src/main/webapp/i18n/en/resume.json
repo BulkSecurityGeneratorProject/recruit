@@ -1,0 +1,39 @@
+
+{
+    "recruitApp": {
+        "resume" : {
+            "home": {
+                "title": "Resumes",
+                "createLabel": "Create a new Resume",
+                "createOrEditLabel": "Create or edit a Resume",
+                "search": "Search for Resume"
+            },
+            "created": "A new Resume is created with identifier {{ param }}",
+            "updated": "A Resume is updated with identifier {{ param }}",
+            "deleted": "A Resume is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Resume {{ id }}?"
+            },
+            "detail": {
+                "title": "Resume"
+            },
+            "name": "Name",
+            "sex": "Sex",
+            "birth": "Birth",
+            "email": "Email",
+            "wechat": "Wechat",
+            "state": "State",
+            "advantage": "Advantage",
+            "place": "Place",
+            "workTime": "Work Time",
+            "experience": "Experience",
+            "undergo": "Undergo",
+            "education": "Education",
+            "salary": "Salary",
+            "position": "Position",
+            "userId": "User Id",
+            "enclosure": "Enclosure",
+            "position": "Position"
+        }
+    }
+}

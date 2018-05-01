@@ -35,5 +35,8 @@
       "en",
       "zh-cn"
     ]
+  },
+  "generator-jhipster-entity-audit": {
+    "auditFramework": "custom"
   }
 }

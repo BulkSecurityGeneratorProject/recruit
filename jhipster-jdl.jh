@@ -18,7 +18,7 @@ entity Company {
    name String //名称
    financing Boolean //是否融资
    personNumber String //公司人数
-   abstract String //简介
+   describe String //描述
    address String //地址
    userId Long //关联注册用户
    type CompanyType //公司类型

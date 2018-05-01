@@ -1,0 +1,43 @@
+{
+    "entityAudit": {
+        "home": {
+            "title": "变更记录",
+            "filter": "过滤",
+            "entityOrTable": "Entity/Table",
+            "limitTo": "限制数",
+            "loadChangeList": "加载更改列表"
+        },
+        "result": {
+            "showInfo": "Last <strong>{{ limit }}</strong> Changes for <strong>{{ entity }}</strong>",
+            "searchFieldLabel": "过滤:",
+            "globalFilter": "全局过滤",
+            "entityIdFilter": "实体Id过滤",
+            "tableHeader": {
+                "entityId": "实体Id",
+                "action": "动作",
+                "version": "版本",
+                "value": "值",
+                "modifiedDate": "修改日期",
+                "modifiedBy": "修改者",
+                "details": "细节"
+            },
+            "tableBody": {
+                "field": "字段",
+                "value": "值",
+                "viewDetails": "查看变更记录"
+            },
+            "noDataFound": "没有查询到",
+            "firstAuditEntry": "There is no previous version available for this entry.\nThis is the first audit entry captured for this object."
+        },
+        "detail": {
+            "close": "关闭",
+            "title": "变更记录",
+            "action": "{{action}} action was performed on below data",
+            "old": "Old/Removed 值",
+            "new": "New/Added 值",
+            "changedFields": "改变的字段",
+            "allFields": "全部字段",
+            "done": "结束"
+        }
+    }
+}

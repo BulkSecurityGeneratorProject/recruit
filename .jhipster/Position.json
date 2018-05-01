@@ -1,0 +1,60 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "resume",
+            "otherEntityName": "resume",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "position"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "describe",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "place",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "experience",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "education",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "salary",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "PositionType",
+            "fieldValues": "COMPUTER,INTERNET,MEDICAL,REALTY,AD,OTHER"
+        },
+        {
+            "fieldName": "order",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20180501141738",
+    "entityTableName": "position",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}

@@ -1,0 +1,13 @@
+{
+    "recruitApp": {
+        "CompanyType" : {
+            "null": "",
+            "COMPUTER": "COMPUTER",
+            "INTERNET": "INTERNET",
+            "MEDICAL": "MEDICAL",
+            "REALTY": "REALTY",
+            "AD": "AD",
+            "OTHER": "OTHER"
+        }
+    }
+}

@@ -7,6 +7,9 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "数据",
+                "position": "职位",
+                "company": "企业",
+                "resume": "简历",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -29,6 +32,7 @@
                 "audits": "审核",
                 "apidocs": "API",
                 "database": "数据库",
+                "entity-audit": "变更记录",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
             "language": "语言"

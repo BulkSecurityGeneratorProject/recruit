@@ -1,0 +1,60 @@
+
+<div *ngIf="position">
+    <h2><span jhiTranslate="recruitApp.position.detail.title">Position</span> {{position.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="recruitApp.position.name">Name</span></dt>
+        <dd>
+            <span>{{position.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.describe">Describe</span></dt>
+        <dd>
+            <span>{{position.describe}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.place">Place</span></dt>
+        <dd>
+            <span>{{position.place}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.experience">Experience</span></dt>
+        <dd>
+            <span>{{position.experience}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.education">Education</span></dt>
+        <dd>
+            <span>{{position.education}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.salary">Salary</span></dt>
+        <dd>
+            <span>{{position.salary}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.type">Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'recruitApp.PositionType.' + position.type}}">{{position.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.order">Order</span></dt>
+        <dd>
+            <span>{{position.order}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.position.company">Company</span></dt>
+        <dd>
+            <div *ngIf="position.companyId">
+                <a [routerLink]="['/company', position.companyId]">{{position.companyId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'position/'+ position.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

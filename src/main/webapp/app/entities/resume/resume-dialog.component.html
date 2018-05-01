@@ -1,0 +1,115 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myResumeLabel" jhiTranslate="recruitApp.resume.home.createOrEditLabel">Create or edit a Resume</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!resume.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="resume.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="resume.name" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.sex" for="field_sex">Sex</label>
+            <input type="text" class="form-control" name="sex" id="field_sex"
+                [(ngModel)]="resume.sex" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.birth" for="field_birth">Birth</label>
+            <div class="d-flex">
+                <input id="field_birth" type="datetime-local" class="form-control" name="birth" [(ngModel)]="resume.birth"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                [(ngModel)]="resume.email" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.wechat" for="field_wechat">Wechat</label>
+            <input type="text" class="form-control" name="wechat" id="field_wechat"
+                [(ngModel)]="resume.wechat" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.state" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                [(ngModel)]="resume.state" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.advantage" for="field_advantage">Advantage</label>
+            <input type="text" class="form-control" name="advantage" id="field_advantage"
+                [(ngModel)]="resume.advantage" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.place" for="field_place">Place</label>
+            <input type="text" class="form-control" name="place" id="field_place"
+                [(ngModel)]="resume.place" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.workTime" for="field_workTime">Work Time</label>
+            <div class="d-flex">
+                <input id="field_workTime" type="datetime-local" class="form-control" name="workTime" [(ngModel)]="resume.workTime"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.experience" for="field_experience">Experience</label>
+            <input type="text" class="form-control" name="experience" id="field_experience"
+                [(ngModel)]="resume.experience" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.undergo" for="field_undergo">Undergo</label>
+            <input type="text" class="form-control" name="undergo" id="field_undergo"
+                [(ngModel)]="resume.undergo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.education" for="field_education">Education</label>
+            <input type="text" class="form-control" name="education" id="field_education"
+                [(ngModel)]="resume.education" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.salary" for="field_salary">Salary</label>
+            <input type="text" class="form-control" name="salary" id="field_salary"
+                [(ngModel)]="resume.salary" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.position" for="field_position">Position</label>
+            <input type="text" class="form-control" name="position" id="field_position"
+                [(ngModel)]="resume.position" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.userId" for="field_userId">User Id</label>
+            <input type="number" class="form-control" name="userId" id="field_userId"
+                [(ngModel)]="resume.userId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.enclosure" for="field_enclosure">Enclosure</label>
+            <input type="text" class="form-control" name="enclosure" id="field_enclosure"
+                [(ngModel)]="resume.enclosure" />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="recruitApp.resume.position" for="field_position">Position</label>
+            <select class="form-control" id="field_position" multiple name="position" [(ngModel)]="resume.positions">
+                <option [ngValue]="getSelected(resume.positions, positionOption)" *ngFor="let positionOption of positions; trackBy: trackPositionById">{{positionOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,13 @@
+{
+    "recruitApp": {
+        "CompanyType" : {
+            "null": "",
+            "COMPUTER": "计算机",
+            "INTERNET": "互联网",
+            "MEDICAL": "医学",
+            "REALTY": "房地产",
+            "AD": "广告",
+            "OTHER": "其他"
+        }
+    }
+}

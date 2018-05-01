@@ -1,0 +1,92 @@
+
+<div *ngIf="resume">
+    <h2><span jhiTranslate="recruitApp.resume.detail.title">Resume</span> {{resume.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="recruitApp.resume.name">Name</span></dt>
+        <dd>
+            <span>{{resume.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.sex">Sex</span></dt>
+        <dd>
+            <span>{{resume.sex}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.birth">Birth</span></dt>
+        <dd>
+            <span>{{resume.birth | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.email">Email</span></dt>
+        <dd>
+            <span>{{resume.email}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.wechat">Wechat</span></dt>
+        <dd>
+            <span>{{resume.wechat}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.state">State</span></dt>
+        <dd>
+            <span>{{resume.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.advantage">Advantage</span></dt>
+        <dd>
+            <span>{{resume.advantage}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.place">Place</span></dt>
+        <dd>
+            <span>{{resume.place}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.workTime">Work Time</span></dt>
+        <dd>
+            <span>{{resume.workTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.experience">Experience</span></dt>
+        <dd>
+            <span>{{resume.experience}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.undergo">Undergo</span></dt>
+        <dd>
+            <span>{{resume.undergo}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.education">Education</span></dt>
+        <dd>
+            <span>{{resume.education}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.salary">Salary</span></dt>
+        <dd>
+            <span>{{resume.salary}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.position">Position</span></dt>
+        <dd>
+            <span>{{resume.position}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.userId">User Id</span></dt>
+        <dd>
+            <span>{{resume.userId}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.enclosure">Enclosure</span></dt>
+        <dd>
+            <span>{{resume.enclosure}}</span>
+        </dd>
+        <dt><span jhiTranslate="recruitApp.resume.position">Position</span></dt>
+        <dd>
+            <span *ngFor="let position of resume.positions; let last = last">
+                <a [routerLink]="['/position', position?.id ]">{{position.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'resume/'+ resume.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

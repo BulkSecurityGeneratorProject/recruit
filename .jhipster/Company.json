@@ -1,0 +1,53 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "position",
+            "otherEntityName": "position",
+            "otherEntityRelationshipName": "company"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "financing",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "personNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "describe",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "CompanyType",
+            "fieldValues": "COMPUTER,INTERNET,MEDICAL,REALTY,AD,OTHER"
+        },
+        {
+            "fieldName": "order",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20180501141739",
+    "entityTableName": "company",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}

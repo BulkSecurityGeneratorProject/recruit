@@ -42,6 +42,13 @@ public class CacheConfiguration {
             cm.createCache(com.recruit.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.recruit.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.recruit.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.recruit.domain.Position.class.getName(), jcacheConfiguration);
+            cm.createCache(com.recruit.domain.Position.class.getName() + ".resumes", jcacheConfiguration);
+            cm.createCache(com.recruit.domain.Company.class.getName(), jcacheConfiguration);
+            cm.createCache(com.recruit.domain.Company.class.getName() + ".positions", jcacheConfiguration);
+            cm.createCache(com.recruit.domain.Resume.class.getName(), jcacheConfiguration);
+            cm.createCache(com.recruit.domain.Resume.class.getName() + ".positions", jcacheConfiguration);
+            cm.createCache( com.recruit.domain.EntityAuditEvent.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

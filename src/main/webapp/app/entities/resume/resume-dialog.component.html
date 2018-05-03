@@ -50,9 +50,9 @@
                 [(ngModel)]="resume.advantage" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="recruitApp.resume.place" for="field_place">Place</label>
-            <input type="text" class="form-control" name="place" id="field_place"
-                [(ngModel)]="resume.place" />
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.targetPlace" for="field_targetPlace">Target Place</label>
+            <input type="text" class="form-control" name="targetPlace" id="field_targetPlace"
+                [(ngModel)]="resume.targetPlace" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.workTime" for="field_workTime">Work Time</label>
@@ -77,14 +77,14 @@
                 [(ngModel)]="resume.education" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="recruitApp.resume.salary" for="field_salary">Salary</label>
-            <input type="text" class="form-control" name="salary" id="field_salary"
-                [(ngModel)]="resume.salary" />
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.targetSalary" for="field_targetSalary">Target Salary</label>
+            <input type="text" class="form-control" name="targetSalary" id="field_targetSalary"
+                [(ngModel)]="resume.targetSalary" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="recruitApp.resume.position" for="field_position">Position</label>
-            <input type="text" class="form-control" name="position" id="field_position"
-                [(ngModel)]="resume.position" />
+            <label class="form-control-label" jhiTranslate="recruitApp.resume.targetPosition" for="field_targetPosition">Target Position</label>
+            <input type="text" class="form-control" name="targetPosition" id="field_targetPosition"
+                [(ngModel)]="resume.targetPosition" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.userId" for="field_userId">User Id</label>
@@ -97,12 +97,6 @@
                 [(ngModel)]="resume.enclosure" />
         </div>
 
-        <div class="form-group">
-            <label jhiTranslate="recruitApp.resume.position" for="field_position">Position</label>
-            <select class="form-control" id="field_position" multiple name="position" [(ngModel)]="resume.positions">
-                <option [ngValue]="getSelected(resume.positions, positionOption)" *ngFor="let positionOption of positions; trackBy: trackPositionById">{{positionOption.id}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

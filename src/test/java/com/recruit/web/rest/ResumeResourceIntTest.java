@@ -65,8 +65,8 @@ public class ResumeResourceIntTest {
     private static final String DEFAULT_ADVANTAGE = "AAAAAAAAAA";
     private static final String UPDATED_ADVANTAGE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PLACE = "AAAAAAAAAA";
-    private static final String UPDATED_PLACE = "BBBBBBBBBB";
+    private static final String DEFAULT_TARGET_PLACE = "AAAAAAAAAA";
+    private static final String UPDATED_TARGET_PLACE = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_WORK_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_WORK_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -80,11 +80,11 @@ public class ResumeResourceIntTest {
     private static final String DEFAULT_EDUCATION = "AAAAAAAAAA";
     private static final String UPDATED_EDUCATION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_SALARY = "AAAAAAAAAA";
-    private static final String UPDATED_SALARY = "BBBBBBBBBB";
+    private static final String DEFAULT_TARGET_SALARY = "AAAAAAAAAA";
+    private static final String UPDATED_TARGET_SALARY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_POSITION = "AAAAAAAAAA";
-    private static final String UPDATED_POSITION = "BBBBBBBBBB";
+    private static final String DEFAULT_TARGET_POSITION = "AAAAAAAAAA";
+    private static final String UPDATED_TARGET_POSITION = "BBBBBBBBBB";
 
     private static final Long DEFAULT_USER_ID = 1L;
     private static final Long UPDATED_USER_ID = 2L;
@@ -146,13 +146,13 @@ public class ResumeResourceIntTest {
             .wechat(DEFAULT_WECHAT)
             .state(DEFAULT_STATE)
             .advantage(DEFAULT_ADVANTAGE)
-            .place(DEFAULT_PLACE)
+            .targetPlace(DEFAULT_TARGET_PLACE)
             .workTime(DEFAULT_WORK_TIME)
             .experience(DEFAULT_EXPERIENCE)
             .undergo(DEFAULT_UNDERGO)
             .education(DEFAULT_EDUCATION)
-            .salary(DEFAULT_SALARY)
-            .position(DEFAULT_POSITION)
+            .targetSalary(DEFAULT_TARGET_SALARY)
+            .targetPosition(DEFAULT_TARGET_POSITION)
             .userId(DEFAULT_USER_ID)
             .enclosure(DEFAULT_ENCLOSURE);
         return resume;
@@ -187,13 +187,13 @@ public class ResumeResourceIntTest {
         assertThat(testResume.getWechat()).isEqualTo(DEFAULT_WECHAT);
         assertThat(testResume.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testResume.getAdvantage()).isEqualTo(DEFAULT_ADVANTAGE);
-        assertThat(testResume.getPlace()).isEqualTo(DEFAULT_PLACE);
+        assertThat(testResume.getTargetPlace()).isEqualTo(DEFAULT_TARGET_PLACE);
         assertThat(testResume.getWorkTime()).isEqualTo(DEFAULT_WORK_TIME);
         assertThat(testResume.getExperience()).isEqualTo(DEFAULT_EXPERIENCE);
         assertThat(testResume.getUndergo()).isEqualTo(DEFAULT_UNDERGO);
         assertThat(testResume.getEducation()).isEqualTo(DEFAULT_EDUCATION);
-        assertThat(testResume.getSalary()).isEqualTo(DEFAULT_SALARY);
-        assertThat(testResume.getPosition()).isEqualTo(DEFAULT_POSITION);
+        assertThat(testResume.getTargetSalary()).isEqualTo(DEFAULT_TARGET_SALARY);
+        assertThat(testResume.getTargetPosition()).isEqualTo(DEFAULT_TARGET_POSITION);
         assertThat(testResume.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testResume.getEnclosure()).isEqualTo(DEFAULT_ENCLOSURE);
 
@@ -240,13 +240,13 @@ public class ResumeResourceIntTest {
             .andExpect(jsonPath("$.[*].wechat").value(hasItem(DEFAULT_WECHAT.toString())))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].advantage").value(hasItem(DEFAULT_ADVANTAGE.toString())))
-            .andExpect(jsonPath("$.[*].place").value(hasItem(DEFAULT_PLACE.toString())))
+            .andExpect(jsonPath("$.[*].targetPlace").value(hasItem(DEFAULT_TARGET_PLACE.toString())))
             .andExpect(jsonPath("$.[*].workTime").value(hasItem(DEFAULT_WORK_TIME.toString())))
             .andExpect(jsonPath("$.[*].experience").value(hasItem(DEFAULT_EXPERIENCE.toString())))
             .andExpect(jsonPath("$.[*].undergo").value(hasItem(DEFAULT_UNDERGO.toString())))
             .andExpect(jsonPath("$.[*].education").value(hasItem(DEFAULT_EDUCATION.toString())))
-            .andExpect(jsonPath("$.[*].salary").value(hasItem(DEFAULT_SALARY.toString())))
-            .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
+            .andExpect(jsonPath("$.[*].targetSalary").value(hasItem(DEFAULT_TARGET_SALARY.toString())))
+            .andExpect(jsonPath("$.[*].targetPosition").value(hasItem(DEFAULT_TARGET_POSITION.toString())))
             .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.intValue())))
             .andExpect(jsonPath("$.[*].enclosure").value(hasItem(DEFAULT_ENCLOSURE.toString())));
     }
@@ -269,13 +269,13 @@ public class ResumeResourceIntTest {
             .andExpect(jsonPath("$.wechat").value(DEFAULT_WECHAT.toString()))
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.advantage").value(DEFAULT_ADVANTAGE.toString()))
-            .andExpect(jsonPath("$.place").value(DEFAULT_PLACE.toString()))
+            .andExpect(jsonPath("$.targetPlace").value(DEFAULT_TARGET_PLACE.toString()))
             .andExpect(jsonPath("$.workTime").value(DEFAULT_WORK_TIME.toString()))
             .andExpect(jsonPath("$.experience").value(DEFAULT_EXPERIENCE.toString()))
             .andExpect(jsonPath("$.undergo").value(DEFAULT_UNDERGO.toString()))
             .andExpect(jsonPath("$.education").value(DEFAULT_EDUCATION.toString()))
-            .andExpect(jsonPath("$.salary").value(DEFAULT_SALARY.toString()))
-            .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
+            .andExpect(jsonPath("$.targetSalary").value(DEFAULT_TARGET_SALARY.toString()))
+            .andExpect(jsonPath("$.targetPosition").value(DEFAULT_TARGET_POSITION.toString()))
             .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.intValue()))
             .andExpect(jsonPath("$.enclosure").value(DEFAULT_ENCLOSURE.toString()));
     }
@@ -308,13 +308,13 @@ public class ResumeResourceIntTest {
             .wechat(UPDATED_WECHAT)
             .state(UPDATED_STATE)
             .advantage(UPDATED_ADVANTAGE)
-            .place(UPDATED_PLACE)
+            .targetPlace(UPDATED_TARGET_PLACE)
             .workTime(UPDATED_WORK_TIME)
             .experience(UPDATED_EXPERIENCE)
             .undergo(UPDATED_UNDERGO)
             .education(UPDATED_EDUCATION)
-            .salary(UPDATED_SALARY)
-            .position(UPDATED_POSITION)
+            .targetSalary(UPDATED_TARGET_SALARY)
+            .targetPosition(UPDATED_TARGET_POSITION)
             .userId(UPDATED_USER_ID)
             .enclosure(UPDATED_ENCLOSURE);
         ResumeDTO resumeDTO = resumeMapper.toDto(updatedResume);
@@ -335,13 +335,13 @@ public class ResumeResourceIntTest {
         assertThat(testResume.getWechat()).isEqualTo(UPDATED_WECHAT);
         assertThat(testResume.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testResume.getAdvantage()).isEqualTo(UPDATED_ADVANTAGE);
-        assertThat(testResume.getPlace()).isEqualTo(UPDATED_PLACE);
+        assertThat(testResume.getTargetPlace()).isEqualTo(UPDATED_TARGET_PLACE);
         assertThat(testResume.getWorkTime()).isEqualTo(UPDATED_WORK_TIME);
         assertThat(testResume.getExperience()).isEqualTo(UPDATED_EXPERIENCE);
         assertThat(testResume.getUndergo()).isEqualTo(UPDATED_UNDERGO);
         assertThat(testResume.getEducation()).isEqualTo(UPDATED_EDUCATION);
-        assertThat(testResume.getSalary()).isEqualTo(UPDATED_SALARY);
-        assertThat(testResume.getPosition()).isEqualTo(UPDATED_POSITION);
+        assertThat(testResume.getTargetSalary()).isEqualTo(UPDATED_TARGET_SALARY);
+        assertThat(testResume.getTargetPosition()).isEqualTo(UPDATED_TARGET_POSITION);
         assertThat(testResume.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testResume.getEnclosure()).isEqualTo(UPDATED_ENCLOSURE);
 
@@ -410,13 +410,13 @@ public class ResumeResourceIntTest {
             .andExpect(jsonPath("$.[*].wechat").value(hasItem(DEFAULT_WECHAT.toString())))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].advantage").value(hasItem(DEFAULT_ADVANTAGE.toString())))
-            .andExpect(jsonPath("$.[*].place").value(hasItem(DEFAULT_PLACE.toString())))
+            .andExpect(jsonPath("$.[*].targetPlace").value(hasItem(DEFAULT_TARGET_PLACE.toString())))
             .andExpect(jsonPath("$.[*].workTime").value(hasItem(DEFAULT_WORK_TIME.toString())))
             .andExpect(jsonPath("$.[*].experience").value(hasItem(DEFAULT_EXPERIENCE.toString())))
             .andExpect(jsonPath("$.[*].undergo").value(hasItem(DEFAULT_UNDERGO.toString())))
             .andExpect(jsonPath("$.[*].education").value(hasItem(DEFAULT_EDUCATION.toString())))
-            .andExpect(jsonPath("$.[*].salary").value(hasItem(DEFAULT_SALARY.toString())))
-            .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
+            .andExpect(jsonPath("$.[*].targetSalary").value(hasItem(DEFAULT_TARGET_SALARY.toString())))
+            .andExpect(jsonPath("$.[*].targetPosition").value(hasItem(DEFAULT_TARGET_POSITION.toString())))
             .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.intValue())))
             .andExpect(jsonPath("$.[*].enclosure").value(hasItem(DEFAULT_ENCLOSURE.toString())));
     }

@@ -1,15 +1,6 @@
 {
     "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "resume",
-            "relationshipName": "position",
-            "otherEntityName": "position",
-            "otherEntityField": "id",
-            "ownerSide": true
-        }
-    ],
+    "relationships": [],
     "fields": [
         {
             "fieldName": "name",
@@ -40,7 +31,7 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "place",
+            "fieldName": "targetPlace",
             "fieldType": "String"
         },
         {
@@ -60,11 +51,11 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "salary",
+            "fieldName": "targetSalary",
             "fieldType": "String"
         },
         {
-            "fieldName": "position",
+            "fieldName": "targetPosition",
             "fieldType": "String"
         },
         {
@@ -76,11 +67,10 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20180501141740",
+    "changelogDate": "20180503042436",
     "entityTableName": "resume",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "enableEntityAudit": true
+    "jpaMetamodelFiltering": false
 }

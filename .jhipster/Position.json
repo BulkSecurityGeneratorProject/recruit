@@ -6,13 +6,6 @@
             "relationshipName": "company",
             "otherEntityName": "company",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "resume",
-            "otherEntityName": "resume",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "position"
         }
     ],
     "fields": [
@@ -50,11 +43,10 @@
             "fieldType": "Long"
         }
     ],
-    "changelogDate": "20180501141738",
+    "changelogDate": "20180503042434",
     "entityTableName": "position",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "enableEntityAudit": true
+    "jpaMetamodelFiltering": false
 }

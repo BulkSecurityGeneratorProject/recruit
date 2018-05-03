@@ -10,7 +10,6 @@ import { Position } from './position.model';
 import { PositionPopupService } from './position-popup.service';
 import { PositionService } from './position.service';
 import { Company, CompanyService } from '../company';
-import { Resume, ResumeService } from '../resume';
 
 @Component({
     selector: 'jhi-position-dialog',
@@ -23,14 +22,11 @@ export class PositionDialogComponent implements OnInit {
 
     companies: Company[];
 
-    resumes: Resume[];
-
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private positionService: PositionService,
         private companyService: CompanyService,
-        private resumeService: ResumeService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -39,8 +35,6 @@ export class PositionDialogComponent implements OnInit {
         this.isSaving = false;
         this.companyService.query()
             .subscribe((res: HttpResponse<Company[]>) => { this.companies = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.resumeService.query()
-            .subscribe((res: HttpResponse<Resume[]>) => { this.resumes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -79,21 +73,6 @@ export class PositionDialogComponent implements OnInit {
 
     trackCompanyById(index: number, item: Company) {
         return item.id;
-    }
-
-    trackResumeById(index: number, item: Resume) {
-        return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
 }
 

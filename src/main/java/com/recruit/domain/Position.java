@@ -1,6 +1,5 @@
 package com.recruit.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,8 +7,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 import com.recruit.domain.enumeration.PositionType;
@@ -21,7 +18,7 @@ import com.recruit.domain.enumeration.PositionType;
 @Table(name = "position")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "position")
-public class Position extends AbstractAuditingEntity implements Serializable {
+public class Position implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -56,11 +53,6 @@ public class Position extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private Company company;
-
-    @ManyToMany(mappedBy = "positions")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Resume> resumes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -186,31 +178,6 @@ public class Position extends AbstractAuditingEntity implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
-    }
-
-    public Set<Resume> getResumes() {
-        return resumes;
-    }
-
-    public Position resumes(Set<Resume> resumes) {
-        this.resumes = resumes;
-        return this;
-    }
-
-    public Position addResume(Resume resume) {
-        this.resumes.add(resume);
-        resume.getPositions().add(this);
-        return this;
-    }
-
-    public Position removeResume(Resume resume) {
-        this.resumes.remove(resume);
-        resume.getPositions().remove(this);
-        return this;
-    }
-
-    public void setResumes(Set<Resume> resumes) {
-        this.resumes = resumes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

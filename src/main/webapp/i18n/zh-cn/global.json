@@ -10,6 +10,8 @@
                 "position": "职位",
                 "company": "企业",
                 "resume": "简历",
+                "position": "Position",
+                "resume": "Resume",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

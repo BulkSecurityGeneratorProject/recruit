@@ -24,16 +24,15 @@
             "wechat": "Wechat",
             "state": "State",
             "advantage": "Advantage",
-            "place": "Place",
+            "targetPlace": "Target Place",
             "workTime": "Work Time",
             "experience": "Experience",
             "undergo": "Undergo",
             "education": "Education",
-            "salary": "Salary",
-            "position": "Position",
+            "targetSalary": "Target Salary",
+            "targetPosition": "Target Position",
             "userId": "User Id",
-            "enclosure": "Enclosure",
-            "position": "Position"
+            "enclosure": "Enclosure"
         }
     }
 }

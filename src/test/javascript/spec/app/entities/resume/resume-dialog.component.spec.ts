@@ -9,7 +9,6 @@ import { RecruitTestModule } from '../../../test.module';
 import { ResumeDialogComponent } from '../../../../../../main/webapp/app/entities/resume/resume-dialog.component';
 import { ResumeService } from '../../../../../../main/webapp/app/entities/resume/resume.service';
 import { Resume } from '../../../../../../main/webapp/app/entities/resume/resume.model';
-import { PositionService } from '../../../../../../main/webapp/app/entities/position';
 
 describe('Component Tests', () => {
 
@@ -25,7 +24,6 @@ describe('Component Tests', () => {
                 imports: [RecruitTestModule],
                 declarations: [ResumeDialogComponent],
                 providers: [
-                    PositionService,
                     ResumeService
                 ]
             })

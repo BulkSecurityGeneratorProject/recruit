@@ -32,23 +32,19 @@ entity Resume{
    wechat String //微信
    state String //当前状态
    advantage String //我的优势描述
-   place String //目标工作地点
+   targetPlace String //目标工作地点
    workTime Instant //开始工作时间
    experience String //工作经验
    undergo String //工作经历描述（项目经验描述）
    education String //最高学历
-   salary String //目标薪资
-   position String //目标岗位
+   targetSalary String //目标薪资
+   targetPosition String //目标岗位
    userId Long //关联注册用户
    enclosure String //附件简历
 }
 
 relationship OneToMany {
     Company{position} to Position{company}
-}
-relationship ManyToMany {
-	Resume{position} to Position{resume}
-	Position{resume} to Resume{position}
 }
 // Set pagination options
 paginate * with pagination

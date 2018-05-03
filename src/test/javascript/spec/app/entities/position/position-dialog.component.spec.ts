@@ -10,7 +10,6 @@ import { PositionDialogComponent } from '../../../../../../main/webapp/app/entit
 import { PositionService } from '../../../../../../main/webapp/app/entities/position/position.service';
 import { Position } from '../../../../../../main/webapp/app/entities/position/position.model';
 import { CompanyService } from '../../../../../../main/webapp/app/entities/company';
-import { ResumeService } from '../../../../../../main/webapp/app/entities/resume';
 
 describe('Component Tests', () => {
 
@@ -27,7 +26,6 @@ describe('Component Tests', () => {
                 declarations: [PositionDialogComponent],
                 providers: [
                     CompanyService,
-                    ResumeService,
                     PositionService
                 ]
             })

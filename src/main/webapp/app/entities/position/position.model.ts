@@ -21,7 +21,6 @@ export class Position implements BaseEntity {
         public type?: PositionType,
         public order?: number,
         public companyId?: number,
-        public resumes?: BaseEntity[],
     ) {
     }
 }

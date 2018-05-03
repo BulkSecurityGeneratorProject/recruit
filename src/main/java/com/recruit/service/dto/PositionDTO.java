@@ -10,7 +10,7 @@ import com.recruit.domain.enumeration.PositionType;
 /**
  * A DTO for the Position entity.
  */
-public class PositionDTO extends AbstractAuditingDTO implements Serializable {
+public class PositionDTO implements Serializable {
 
     private Long id;
 

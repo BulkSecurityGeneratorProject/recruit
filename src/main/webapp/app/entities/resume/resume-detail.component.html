@@ -32,9 +32,9 @@
         <dd>
             <span>{{resume.advantage}}</span>
         </dd>
-        <dt><span jhiTranslate="recruitApp.resume.place">Place</span></dt>
+        <dt><span jhiTranslate="recruitApp.resume.targetPlace">Target Place</span></dt>
         <dd>
-            <span>{{resume.place}}</span>
+            <span>{{resume.targetPlace}}</span>
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.workTime">Work Time</span></dt>
         <dd>
@@ -52,13 +52,13 @@
         <dd>
             <span>{{resume.education}}</span>
         </dd>
-        <dt><span jhiTranslate="recruitApp.resume.salary">Salary</span></dt>
+        <dt><span jhiTranslate="recruitApp.resume.targetSalary">Target Salary</span></dt>
         <dd>
-            <span>{{resume.salary}}</span>
+            <span>{{resume.targetSalary}}</span>
         </dd>
-        <dt><span jhiTranslate="recruitApp.resume.position">Position</span></dt>
+        <dt><span jhiTranslate="recruitApp.resume.targetPosition">Target Position</span></dt>
         <dd>
-            <span>{{resume.position}}</span>
+            <span>{{resume.targetPosition}}</span>
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.userId">User Id</span></dt>
         <dd>
@@ -67,12 +67,6 @@
         <dt><span jhiTranslate="recruitApp.resume.enclosure">Enclosure</span></dt>
         <dd>
             <span>{{resume.enclosure}}</span>
-        </dd>
-        <dt><span jhiTranslate="recruitApp.resume.position">Position</span></dt>
-        <dd>
-            <span *ngFor="let position of resume.positions; let last = last">
-                <a [routerLink]="['/position', position?.id ]">{{position.id}}</a>{{last ? '' : ', '}}
-            </span>
         </dd>
     </dl>
 

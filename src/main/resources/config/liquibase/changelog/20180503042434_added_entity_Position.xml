@@ -15,10 +15,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Resume.
+        Added the entity Position.
     -->
-    <changeSet id="20180501141740-1" author="jhipster">
-        <createTable tableName="resume">
+    <changeSet id="20180503042434-1" author="jhipster">
+        <createTable tableName="position">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -26,27 +26,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="sex" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="birth" type="timestamp">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="wechat" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="state" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="advantage" type="varchar(255)">
+            <column name="jhi_describe" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -54,15 +34,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="work_time" type="timestamp">
-                <constraints nullable="true" />
-            </column>
-
             <column name="experience" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="undergo" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -74,30 +46,20 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="position" type="varchar(255)">
+            <column name="jhi_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="user_id" type="bigint">
+            <column name="jhi_order" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="enclosure" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="position_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="position_id" type="bigint">
+            <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="resume" columnName="birth" columnDataType="datetime"/>
-        <dropDefaultValue tableName="resume" columnName="work_time" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

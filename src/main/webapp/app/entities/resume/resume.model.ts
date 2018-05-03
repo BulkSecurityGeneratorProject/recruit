@@ -10,16 +10,15 @@ export class Resume implements BaseEntity {
         public wechat?: string,
         public state?: string,
         public advantage?: string,
-        public place?: string,
+        public targetPlace?: string,
         public workTime?: any,
         public experience?: string,
         public undergo?: string,
         public education?: string,
-        public salary?: string,
-        public position?: string,
+        public targetSalary?: string,
+        public targetPosition?: string,
         public userId?: number,
         public enclosure?: string,
-        public positions?: BaseEntity[],
     ) {
     }
 }

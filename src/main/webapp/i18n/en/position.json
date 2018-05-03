@@ -25,8 +25,7 @@
             "salary": "Salary",
             "type": "Type",
             "order": "Order",
-            "company": "Company",
-            "resume": "Resume"
+            "company": "Company"
         }
     }
 }

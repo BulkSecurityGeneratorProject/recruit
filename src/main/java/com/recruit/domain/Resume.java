@@ -8,8 +8,6 @@ import javax.persistence.*;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -19,7 +17,7 @@ import java.util.Objects;
 @Table(name = "resume")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "resume")
-public class Resume extends AbstractAuditingEntity implements Serializable {
+public class Resume implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -48,8 +46,8 @@ public class Resume extends AbstractAuditingEntity implements Serializable {
     @Column(name = "advantage")
     private String advantage;
 
-    @Column(name = "place")
-    private String place;
+    @Column(name = "target_place")
+    private String targetPlace;
 
     @Column(name = "work_time")
     private Instant workTime;
@@ -63,24 +61,17 @@ public class Resume extends AbstractAuditingEntity implements Serializable {
     @Column(name = "education")
     private String education;
 
-    @Column(name = "salary")
-    private String salary;
+    @Column(name = "target_salary")
+    private String targetSalary;
 
-    @Column(name = "position")
-    private String position;
+    @Column(name = "target_position")
+    private String targetPosition;
 
     @Column(name = "user_id")
     private Long userId;
 
     @Column(name = "enclosure")
     private String enclosure;
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "resume_position",
-               joinColumns = @JoinColumn(name="resumes_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="positions_id", referencedColumnName="id"))
-    private Set<Position> positions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -182,17 +173,17 @@ public class Resume extends AbstractAuditingEntity implements Serializable {
         this.advantage = advantage;
     }
 
-    public String getPlace() {
-        return place;
+    public String getTargetPlace() {
+        return targetPlace;
     }
 
-    public Resume place(String place) {
-        this.place = place;
+    public Resume targetPlace(String targetPlace) {
+        this.targetPlace = targetPlace;
         return this;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setTargetPlace(String targetPlace) {
+        this.targetPlace = targetPlace;
     }
 
     public Instant getWorkTime() {
@@ -247,30 +238,30 @@ public class Resume extends AbstractAuditingEntity implements Serializable {
         this.education = education;
     }
 
-    public String getSalary() {
-        return salary;
+    public String getTargetSalary() {
+        return targetSalary;
     }
 
-    public Resume salary(String salary) {
-        this.salary = salary;
+    public Resume targetSalary(String targetSalary) {
+        this.targetSalary = targetSalary;
         return this;
     }
 
-    public void setSalary(String salary) {
-        this.salary = salary;
+    public void setTargetSalary(String targetSalary) {
+        this.targetSalary = targetSalary;
     }
 
-    public String getPosition() {
-        return position;
+    public String getTargetPosition() {
+        return targetPosition;
     }
 
-    public Resume position(String position) {
-        this.position = position;
+    public Resume targetPosition(String targetPosition) {
+        this.targetPosition = targetPosition;
         return this;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setTargetPosition(String targetPosition) {
+        this.targetPosition = targetPosition;
     }
 
     public Long getUserId() {
@@ -297,31 +288,6 @@ public class Resume extends AbstractAuditingEntity implements Serializable {
 
     public void setEnclosure(String enclosure) {
         this.enclosure = enclosure;
-    }
-
-    public Set<Position> getPositions() {
-        return positions;
-    }
-
-    public Resume positions(Set<Position> positions) {
-        this.positions = positions;
-        return this;
-    }
-
-    public Resume addPosition(Position position) {
-        this.positions.add(position);
-        position.getResumes().add(this);
-        return this;
-    }
-
-    public Resume removePosition(Position position) {
-        this.positions.remove(position);
-        position.getResumes().remove(this);
-        return this;
-    }
-
-    public void setPositions(Set<Position> positions) {
-        this.positions = positions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -356,13 +322,13 @@ public class Resume extends AbstractAuditingEntity implements Serializable {
             ", wechat='" + getWechat() + "'" +
             ", state='" + getState() + "'" +
             ", advantage='" + getAdvantage() + "'" +
-            ", place='" + getPlace() + "'" +
+            ", targetPlace='" + getTargetPlace() + "'" +
             ", workTime='" + getWorkTime() + "'" +
             ", experience='" + getExperience() + "'" +
             ", undergo='" + getUndergo() + "'" +
             ", education='" + getEducation() + "'" +
-            ", salary='" + getSalary() + "'" +
-            ", position='" + getPosition() + "'" +
+            ", targetSalary='" + getTargetSalary() + "'" +
+            ", targetPosition='" + getTargetPosition() + "'" +
             ", userId=" + getUserId() +
             ", enclosure='" + getEnclosure() + "'" +
             "}";

@@ -3,14 +3,12 @@ package com.recruit.service.dto;
 
 import java.time.Instant;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
  * A DTO for the Resume entity.
  */
-public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
+public class ResumeDTO implements Serializable {
 
     private Long id;
 
@@ -28,7 +26,7 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
 
     private String advantage;
 
-    private String place;
+    private String targetPlace;
 
     private Instant workTime;
 
@@ -38,15 +36,13 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
 
     private String education;
 
-    private String salary;
+    private String targetSalary;
 
-    private String position;
+    private String targetPosition;
 
     private Long userId;
 
     private String enclosure;
-
-    private Set<PositionDTO> positions = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -112,12 +108,12 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
         this.advantage = advantage;
     }
 
-    public String getPlace() {
-        return place;
+    public String getTargetPlace() {
+        return targetPlace;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setTargetPlace(String targetPlace) {
+        this.targetPlace = targetPlace;
     }
 
     public Instant getWorkTime() {
@@ -152,20 +148,20 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
         this.education = education;
     }
 
-    public String getSalary() {
-        return salary;
+    public String getTargetSalary() {
+        return targetSalary;
     }
 
-    public void setSalary(String salary) {
-        this.salary = salary;
+    public void setTargetSalary(String targetSalary) {
+        this.targetSalary = targetSalary;
     }
 
-    public String getPosition() {
-        return position;
+    public String getTargetPosition() {
+        return targetPosition;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setTargetPosition(String targetPosition) {
+        this.targetPosition = targetPosition;
     }
 
     public Long getUserId() {
@@ -182,14 +178,6 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setEnclosure(String enclosure) {
         this.enclosure = enclosure;
-    }
-
-    public Set<PositionDTO> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(Set<PositionDTO> positions) {
-        this.positions = positions;
     }
 
     @Override
@@ -224,13 +212,13 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
             ", wechat='" + getWechat() + "'" +
             ", state='" + getState() + "'" +
             ", advantage='" + getAdvantage() + "'" +
-            ", place='" + getPlace() + "'" +
+            ", targetPlace='" + getTargetPlace() + "'" +
             ", workTime='" + getWorkTime() + "'" +
             ", experience='" + getExperience() + "'" +
             ", undergo='" + getUndergo() + "'" +
             ", education='" + getEducation() + "'" +
-            ", salary='" + getSalary() + "'" +
-            ", position='" + getPosition() + "'" +
+            ", targetSalary='" + getTargetSalary() + "'" +
+            ", targetPosition='" + getTargetPosition() + "'" +
             ", userId=" + getUserId() +
             ", enclosure='" + getEnclosure() + "'" +
             "}";

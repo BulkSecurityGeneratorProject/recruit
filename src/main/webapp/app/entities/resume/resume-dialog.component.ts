@@ -4,12 +4,11 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { Resume } from './resume.model';
 import { ResumePopupService } from './resume-popup.service';
 import { ResumeService } from './resume.service';
-import { Position, PositionService } from '../position';
 
 @Component({
     selector: 'jhi-resume-dialog',
@@ -20,21 +19,15 @@ export class ResumeDialogComponent implements OnInit {
     resume: Resume;
     isSaving: boolean;
 
-    positions: Position[];
-
     constructor(
         public activeModal: NgbActiveModal,
-        private jhiAlertService: JhiAlertService,
         private resumeService: ResumeService,
-        private positionService: PositionService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.positionService.query()
-            .subscribe((res: HttpResponse<Position[]>) => { this.positions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -65,25 +58,6 @@ export class ResumeDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackPositionById(index: number, item: Position) {
-        return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
 }
 

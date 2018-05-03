@@ -77,7 +77,7 @@ public class ResumeServiceImpl implements ResumeService {
     @Transactional(readOnly = true)
     public ResumeDTO findOne(Long id) {
         log.debug("Request to get Resume : {}", id);
-        Resume resume = resumeRepository.findOneWithEagerRelationships(id);
+        Resume resume = resumeRepository.findOne(id);
         return resumeMapper.toDto(resume);
     }
 

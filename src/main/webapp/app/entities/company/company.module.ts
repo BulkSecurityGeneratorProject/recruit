@@ -15,6 +15,7 @@ import {
     companyPopupRoute,
     CompanyResolvePagingParams,
 } from './';
+import { UEditorModule } from 'ngx-ueditor';
 
 const ENTITY_STATES = [
     ...companyRoute,
@@ -24,6 +25,14 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RecruitSharedModule,
+        UEditorModule.forRoot({
+            // 指定ueditor.js路径目录
+            path: 'content/js/ueditor/',
+            // 默认全局配置项
+            options: {
+                themePath: '/content/js/ueditor/themes/'
+            }
+        }),
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [

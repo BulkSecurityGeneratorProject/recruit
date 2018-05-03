@@ -19,8 +19,7 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.position.describe" for="field_describe">Describe</label>
-            <input type="text" class="form-control" name="describe" id="field_describe"
-                [(ngModel)]="position.describe" />
+            <ueditor name="describe" id="field_describe" [(ngModel)]="position.describe"></ueditor>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.position.place" for="field_place">Place</label>
@@ -63,7 +62,7 @@
             <label class="form-control-label" jhiTranslate="recruitApp.position.company" for="field_company">Company</label>
             <select class="form-control" id="field_company" name="company" [(ngModel)]="position.companyId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="companyOption.id" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.id}}</option>
+                <option [ngValue]="companyOption.id" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.name}}</option>
             </select>
         </div>
     </div>

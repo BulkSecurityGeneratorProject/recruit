@@ -48,6 +48,7 @@ relationship OneToMany {
 }
 relationship ManyToMany {
 	Resume{position} to Position{resume}
+	Position{resume} to Resume{position}
 }
 // Set pagination options
 paginate * with pagination

@@ -3,36 +3,36 @@
     "recruitApp": {
         "resume" : {
             "home": {
-                "title": "Resumes",
-                "createLabel": "创建新 Resume",
-                "createOrEditLabel": "创建或编辑 Resume",
-                "search": "查找 Resume"
+                "title": "简历",
+                "createLabel": "创建新 简历",
+                "createOrEditLabel": "创建或编辑 简历",
+                "search": "查找 简历"
             },
-            "created": "Resume {{ param }} 创建成功",
-            "updated": "Resume {{ param }} 更新成功",
-            "deleted": "Resume {{ param }} 删除成功",
+            "created": "简历 {{ param }} 创建成功",
+            "updated": "简历 {{ param }} 更新成功",
+            "deleted": "简历 {{ param }} 删除成功",
             "delete": {
-                "question": "你确定要删除 Resume {{ id }} 吗？"
+                "question": "你确定要删除 简历 {{ id }} 吗？"
             },
             "detail": {
-                "title": "Resume"
+                "title": "简历"
             },
-            "name": "Name",
-            "sex": "Sex",
-            "birth": "Birth",
-            "email": "Email",
-            "wechat": "Wechat",
-            "state": "State",
-            "advantage": "Advantage",
-            "targetPlace": "Target Place",
-            "workTime": "Work Time",
-            "experience": "Experience",
-            "undergo": "Undergo",
-            "education": "Education",
-            "targetSalary": "Target Salary",
-            "targetPosition": "Target Position",
-            "userId": "User Id",
-            "enclosure": "Enclosure"
+            "name": "姓名",
+            "sex": "性别",
+            "birth": "生日",
+            "email": "邮箱",
+            "wechat": "微信",
+            "state": "当前状态",
+            "advantage": "我的优势描述",
+            "targetPlace": "目标工作地点",
+            "workTime": "开始工作时间",
+            "experience": "工作经验",
+            "undergo": "工作经历描述（项目经验描述）",
+            "education": "最高学历",
+            "targetSalary": "目标薪资",
+            "targetPosition": "目标岗位",
+            "userId": "关联注册用户",
+            "enclosure": "附件简历"
         }
     }
 }

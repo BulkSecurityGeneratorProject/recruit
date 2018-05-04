@@ -3,29 +3,29 @@
     "recruitApp": {
         "position" : {
             "home": {
-                "title": "Positions",
-                "createLabel": "创建新 Position",
-                "createOrEditLabel": "创建或编辑 Position",
-                "search": "查找 Position"
+                "title": "职位",
+                "createLabel": "创建新 职位",
+                "createOrEditLabel": "创建或编辑 职位",
+                "search": "查找 职位"
             },
-            "created": "Position {{ param }} 创建成功",
-            "updated": "Position {{ param }} 更新成功",
-            "deleted": "Position {{ param }} 删除成功",
+            "created": "职位 {{ param }} 创建成功",
+            "updated": "职位 {{ param }} 更新成功",
+            "deleted": "职位 {{ param }} 删除成功",
             "delete": {
-                "question": "你确定要删除 Position {{ id }} 吗？"
+                "question": "你确定要删除 职位 {{ id }} 吗？"
             },
             "detail": {
-                "title": "Position"
+                "title": "职位"
             },
-            "name": "Name",
-            "describe": "Describe",
-            "place": "Place",
-            "experience": "Experience",
-            "education": "Education",
-            "salary": "Salary",
-            "type": "Type",
-            "order": "Order",
-            "company": "Company"
+            "name": "名称",
+            "describe": "描述",
+            "place": "工作地点",
+            "experience": "经验",
+            "education": "学历",
+            "salary": "薪资",
+            "type": "职位类型",
+            "order": "排序",
+            "company": "公司"
         }
     }
 }

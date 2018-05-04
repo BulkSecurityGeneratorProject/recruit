@@ -3,29 +3,29 @@
     "recruitApp": {
         "company" : {
             "home": {
-                "title": "Companies",
-                "createLabel": "创建新 Company",
-                "createOrEditLabel": "创建或编辑 Company",
-                "search": "查找 Company"
+                "title": "企业",
+                "createLabel": "创建新 企业",
+                "createOrEditLabel": "创建或编辑 企业",
+                "search": "查找 企业"
             },
-            "created": "Company {{ param }} 创建成功",
-            "updated": "Company {{ param }} 更新成功",
-            "deleted": "Company {{ param }} 删除成功",
+            "created": "企业 {{ param }} 创建成功",
+            "updated": "企业 {{ param }} 更新成功",
+            "deleted": "企业 {{ param }} 删除成功",
             "delete": {
-                "question": "你确定要删除 Company {{ id }} 吗？"
+                "question": "你确定要删除 企业 {{ id }} 吗？"
             },
             "detail": {
-                "title": "Company"
+                "title": "企业"
             },
-            "name": "Name",
-            "financing": "Financing",
-            "personNumber": "Person Number",
-            "describe": "Describe",
-            "address": "Address",
-            "userId": "User Id",
-            "type": "Type",
-            "order": "Order",
-            "position": "Position"
+            "name": "名称",
+            "financing": "是否融资",
+            "personNumber": "公司人数",
+            "describe": "描述",
+            "address": "地址",
+            "userId": "关联注册用户",
+            "type": "公司类型",
+            "order": "排序",
+            "position": "职位"
         }
     }
 }

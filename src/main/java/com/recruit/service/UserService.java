@@ -1,6 +1,5 @@
 package com.recruit.service;
 
-import com.recruit.config.CacheConfiguration;
 import com.recruit.domain.Authority;
 import com.recruit.domain.User;
 import com.recruit.repository.AuthorityRepository;

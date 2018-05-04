@@ -32,7 +32,10 @@ export class CompanyService {
         return this.http.get<Company>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
-
+    findByUserId(id: number): Observable<EntityResponseType> {
+        return this.http.get<Company>(`${this.resourceUrl}/user/${id}`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
     query(req?: any): Observable<HttpResponse<Company[]>> {
         const options = createRequestOption(req);
         return this.http.get<Company[]>(this.resourceUrl, { params: options, observe: 'response' })

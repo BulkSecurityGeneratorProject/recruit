@@ -7,6 +7,7 @@ import { ResumeComponent } from './resume.component';
 import { ResumeDetailComponent } from './resume-detail.component';
 import { ResumePopupComponent } from './resume-dialog.component';
 import { ResumeDeletePopupComponent } from './resume-delete-dialog.component';
+import {ResumeUserComponent} from './resume-user.component';
 
 @Injectable()
 export class ResumeResolvePagingParams implements Resolve<any> {
@@ -39,6 +40,14 @@ export const resumeRoute: Routes = [
     }, {
         path: 'resume/:id',
         component: ResumeDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'recruitApp.resume.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'resume-user',
+        component: ResumeUserComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'recruitApp.resume.home.title'

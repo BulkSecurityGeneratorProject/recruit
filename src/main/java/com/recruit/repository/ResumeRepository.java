@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ResumeRepository extends JpaRepository<Resume, Long> {
 
+    Resume findOneByUserId(Long id);
 }

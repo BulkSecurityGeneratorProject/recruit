@@ -8,8 +8,8 @@
             "entities": {
                 "main": "数据",
                 "position": "职位",
-                "company": "企业",
-                "resume": "简历",
+                "company": "企业信息",
+                "resume": "简历信息",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -19,6 +19,8 @@
                 "sessions": "会话",
                 "login": "登录",
                 "logout": "退出",
+                "company": "企业信息",
+                "resume": "简历信息",
                 "register": "注册"
             },
             "admin": {
@@ -42,8 +44,8 @@
             "username.placeholder": "您的账号",
             "newpassword": "新密码",
             "newpassword.placeholder": "您的新密码",
-            "company":"企业？",
-            "company.placeholder":"企业？",
+            "company":"企业信息？",
+            "company.placeholder":"企业信息？",
             "confirmpassword": "新密码确认",
             "confirmpassword.placeholder": "确认您的新密码",
             "email": "电子邮件",

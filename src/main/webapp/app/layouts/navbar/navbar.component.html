@@ -18,6 +18,22 @@
                     </span>
                 </a>
             </li>
+            <li *jhiHasAnyAuthority="'ROLE_COMPANY'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="company-user" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-building" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.entities.company">Company</span>
+                    </span>
+                </a>
+            </li>
+            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="resume-user" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-address-book" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.entities.resume">Resume</span>
+                    </span>
+                </a>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
@@ -31,19 +47,19 @@
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
                         <a class="dropdown-item" routerLink="position" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-coffee" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.position">Position</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="company" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-building" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.company">Company</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="resume" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-address-book" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.resume">Resume</span>
                         </a>
                     </li>
@@ -124,14 +140,11 @@
             </li>
             <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
-                  <span *ngIf="!getImageUrl()">
+                  <span>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.account.main">
                       Account
                     </span>
-                  </span>
-                  <span *ngIf="getImageUrl()">
-                      <img [src]="getImageUrl()" class="profile-image img-circle" alt="Avatar">
                   </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>

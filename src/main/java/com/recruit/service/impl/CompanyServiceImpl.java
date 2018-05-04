@@ -80,6 +80,19 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findOne(id);
         return companyMapper.toDto(company);
     }
+    /**
+     * Get one company by user id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public CompanyDTO findByUserId(Long id) {
+        log.debug("Request to get Company By UserId: {}", id);
+        Company company = companyRepository.findOneByUserId(id);
+        return companyMapper.toDto(company);
+    }
 
     /**
      * Delete the company by id.

@@ -6,6 +6,7 @@
                 "title": "Resumes",
                 "createLabel": "Create a new Resume",
                 "createOrEditLabel": "Create or edit a Resume",
+                "editLabel": "Edit a Resume",
                 "search": "Search for Resume"
             },
             "created": "A new Resume is created with identifier {{ param }}",

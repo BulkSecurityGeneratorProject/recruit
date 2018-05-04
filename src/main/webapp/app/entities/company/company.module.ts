@@ -16,6 +16,7 @@ import {
     CompanyResolvePagingParams,
 } from './';
 import { UEditorModule } from 'ngx-ueditor';
+import { CompanyUserComponent } from './company-user.component';
 
 const ENTITY_STATES = [
     ...companyRoute,
@@ -41,6 +42,7 @@ const ENTITY_STATES = [
         CompanyDialogComponent,
         CompanyDeleteDialogComponent,
         CompanyPopupComponent,
+        CompanyUserComponent,
         CompanyDeletePopupComponent,
     ],
     entryComponents: [

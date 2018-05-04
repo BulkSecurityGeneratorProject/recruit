@@ -3,19 +3,20 @@
     "recruitApp": {
         "company" : {
             "home": {
-                "title": "企业",
-                "createLabel": "创建新 企业",
-                "createOrEditLabel": "创建或编辑 企业",
-                "search": "查找 企业"
+                "title": "企业信息",
+                "createLabel": "创建新 企业信息",
+                "createOrEditLabel": "创建或编辑 企业信息",
+                "editLabel": "编辑 企业信息",
+                "search": "查找 企业信息"
             },
-            "created": "企业 {{ param }} 创建成功",
-            "updated": "企业 {{ param }} 更新成功",
-            "deleted": "企业 {{ param }} 删除成功",
+            "created": "企业信息 {{ param }} 创建成功",
+            "updated": "企业信息 {{ param }} 更新成功",
+            "deleted": "企业信息 {{ param }} 删除成功",
             "delete": {
-                "question": "你确定要删除 企业 {{ id }} 吗？"
+                "question": "你确定要删除 企业信息 {{ id }} 吗？"
             },
             "detail": {
-                "title": "企业"
+                "title": "企业信息"
             },
             "name": "名称",
             "financing": "是否融资",

@@ -3,19 +3,20 @@
     "recruitApp": {
         "resume" : {
             "home": {
-                "title": "简历",
-                "createLabel": "创建新 简历",
-                "createOrEditLabel": "创建或编辑 简历",
-                "search": "查找 简历"
+                "title": "简历信息",
+                "createLabel": "创建新 简历信息",
+                "createOrEditLabel": "创建或编辑 简历信息",
+                "editLabel": "编辑 简历信息",
+                "search": "查找 简历信息"
             },
-            "created": "简历 {{ param }} 创建成功",
-            "updated": "简历 {{ param }} 更新成功",
-            "deleted": "简历 {{ param }} 删除成功",
+            "created": "简历信息 {{ param }} 创建成功",
+            "updated": "简历信息 {{ param }} 更新成功",
+            "deleted": "简历信息 {{ param }} 删除成功",
             "delete": {
-                "question": "你确定要删除 简历 {{ id }} 吗？"
+                "question": "你确定要删除 简历信息 {{ id }} 吗？"
             },
             "detail": {
-                "title": "简历"
+                "title": "简历信息"
             },
             "name": "姓名",
             "sex": "性别",

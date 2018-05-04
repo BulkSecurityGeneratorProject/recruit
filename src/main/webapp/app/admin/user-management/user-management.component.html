@@ -62,7 +62,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'user-management/'+ user.login + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login || user.login === 'system'">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>

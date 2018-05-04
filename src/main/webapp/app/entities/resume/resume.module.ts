@@ -1,7 +1,7 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { RecruitSharedModule } from '../../shared';
+import {RecruitSharedModule} from '../../shared';
 import {
     ResumeService,
     ResumePopupService,
@@ -15,6 +15,8 @@ import {
     resumePopupRoute,
     ResumeResolvePagingParams,
 } from './';
+import {UEditorModule} from 'ngx-ueditor';
+import {ResumeUserComponent} from './resume-user.component';
 
 const ENTITY_STATES = [
     ...resumeRoute,
@@ -24,6 +26,14 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RecruitSharedModule,
+        UEditorModule.forRoot({
+            // 指定ueditor.js路径目录
+            path: 'content/js/ueditor/',
+            // 默认全局配置项
+            options: {
+                themePath: '/content/js/ueditor/themes/'
+            }
+        }),
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [
@@ -32,6 +42,7 @@ const ENTITY_STATES = [
         ResumeDialogComponent,
         ResumeDeleteDialogComponent,
         ResumePopupComponent,
+        ResumeUserComponent,
         ResumeDeletePopupComponent,
     ],
     entryComponents: [
@@ -48,4 +59,5 @@ const ENTITY_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class RecruitResumeModule {}
+export class RecruitResumeModule {
+}

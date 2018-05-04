@@ -44,9 +44,11 @@ public interface CompanyService {
      * Search for the company corresponding to the query.
      *
      * @param query the query of the search
-     * 
+     *
      * @param pageable the pagination information
      * @return the list of entities
      */
     Page<CompanyDTO> search(String query, Pageable pageable);
+
+    CompanyDTO findByUserId(Long id);
 }

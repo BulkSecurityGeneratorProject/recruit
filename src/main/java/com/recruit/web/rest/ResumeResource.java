@@ -112,6 +112,19 @@ public class ResumeResource {
         ResumeDTO resumeDTO = resumeService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(resumeDTO));
     }
+    /**
+     * GET  /resumes/user/:id : get the "userId" resume.
+     *
+     * @param id the userId of the resumeDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the resumeDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/resumes/user/{id}")
+    @Timed
+    public ResponseEntity<ResumeDTO> getResumeByUserId(@PathVariable Long id) {
+        log.debug("REST request to get Resume : {}", id);
+        ResumeDTO resumeDTO = resumeService.findByUserId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(resumeDTO));
+    }
 
     /**
      * DELETE  /resumes/:id : delete the "id" resume.

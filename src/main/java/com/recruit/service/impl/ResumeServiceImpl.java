@@ -80,6 +80,19 @@ public class ResumeServiceImpl implements ResumeService {
         Resume resume = resumeRepository.findOne(id);
         return resumeMapper.toDto(resume);
     }
+    /**
+     * Get one resume by userId.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public ResumeDTO findByUserId(Long id) {
+        log.debug("Request to get Resume By UserId : {}", id);
+        Resume resume = resumeRepository.findOneByUserId(id);
+        return resumeMapper.toDto(resume);
+    }
 
     /**
      * Delete the resume by id.

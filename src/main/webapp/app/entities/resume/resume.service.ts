@@ -34,6 +34,10 @@ export class ResumeService {
         return this.http.get<Resume>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
+    findByUserId(id: number): Observable<EntityResponseType> {
+        return this.http.get<Resume>(`${this.resourceUrl}/user/${id}`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
 
     query(req?: any): Observable<HttpResponse<Resume[]>> {
         const options = createRequestOption(req);

@@ -112,6 +112,19 @@ public class CompanyResource {
         CompanyDTO companyDTO = companyService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(companyDTO));
     }
+    /**
+     * GET  /companies/user/:id : get the "userId" company.
+     *
+     * @param id the id of the companyDTO user id to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the companyDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/companies/user/{id}")
+    @Timed
+    public ResponseEntity<CompanyDTO> getCompanyByUserId(@PathVariable Long id) {
+        log.debug("REST request to get Company By User Id : {}", id);
+        CompanyDTO companyDTO = companyService.findByUserId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(companyDTO));
+    }
 
     /**
      * DELETE  /companies/:id : delete the "id" company.

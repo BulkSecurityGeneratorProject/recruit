@@ -1,26 +1,20 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-
-    <div class="modal-header">
-        <h4 class="modal-title" id="myResumeLabel" jhiTranslate="recruitApp.resume.home.createOrEditLabel">Create or edit a Resume</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;</button>
-    </div>
-    <div class="modal-body">
+    <div>
+        <h2>
+            <span jhiTranslate="recruitApp.resume.home.editLabel">Edit a Resume</span>
+        </h2>
+        <jhi-alert></jhi-alert>
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!resume.id">
-            <label for="id" jhiTranslate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="resume.id" readonly />
-        </div>
+        <hr>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.name" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="resume.name" />
+                   [(ngModel)]="resume.name" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.sex" for="field_sex">Sex</label>
             <input type="text" class="form-control" name="sex" id="field_sex"
-                [(ngModel)]="resume.sex" />
+                   [(ngModel)]="resume.sex" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.birth" for="field_birth">Birth</label>
@@ -32,38 +26,37 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.email" for="field_email">Email</label>
             <input type="text" class="form-control" name="email" id="field_email"
-                [(ngModel)]="resume.email" />
+                   [(ngModel)]="resume.email" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.wechat" for="field_wechat">Wechat</label>
             <input type="text" class="form-control" name="wechat" id="field_wechat"
-                [(ngModel)]="resume.wechat" />
+                   [(ngModel)]="resume.wechat" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.state" for="field_state">State</label>
             <input type="text" class="form-control" name="state" id="field_state"
-                [(ngModel)]="resume.state" />
+                   [(ngModel)]="resume.state" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.advantage" for="field_advantage">Advantage</label>
-            <ueditor name="advantage" id="field_advantage" [(ngModel)]="resume.advantage"  [loadingTip]="'加载中……'"></ueditor>
+            <ueditor name="advantage" id="field_advantage" [(ngModel)]="resume.advantage" [loadingTip]="'加载中……'"></ueditor>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.targetPlace" for="field_targetPlace">Target Place</label>
             <input type="text" class="form-control" name="targetPlace" id="field_targetPlace"
-                [(ngModel)]="resume.targetPlace" />
+                   [(ngModel)]="resume.targetPlace" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.workTime" for="field_workTime">Work Time</label>
             <div class="d-flex">
-                <input id="field_workTime" type="datetime-local" class="form-control" name="workTime" [(ngModel)]="resume.workTime"
-                />
+                <input id="field_workTime" type="datetime-local" class="form-control" name="workTime" [(ngModel)]="resume.workTime" />
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.experience" for="field_experience">Experience</label>
             <input type="text" class="form-control" name="experience" id="field_experience"
-                [(ngModel)]="resume.experience" />
+                   [(ngModel)]="resume.experience" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.undergo" for="field_undergo">Undergo</label>
@@ -72,32 +65,22 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.education" for="field_education">Education</label>
             <input type="text" class="form-control" name="education" id="field_education"
-                [(ngModel)]="resume.education" />
+                   [(ngModel)]="resume.education" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.targetSalary" for="field_targetSalary">Target Salary</label>
             <input type="text" class="form-control" name="targetSalary" id="field_targetSalary"
-                [(ngModel)]="resume.targetSalary" />
+                   [(ngModel)]="resume.targetSalary" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="recruitApp.resume.targetPosition" for="field_targetPosition">Target Position</label>
             <input type="text" class="form-control" name="targetPosition" id="field_targetPosition"
-                [(ngModel)]="resume.targetPosition" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="recruitApp.resume.userId" for="field_userId">User Id</label>
-            <input type="number" class="form-control" name="userId" id="field_userId" disabled
-                [(ngModel)]="resume.userId" />
+                   [(ngModel)]="resume.targetPosition" />
         </div>
         <div class="form-group custom-file mb-3">
             <input type="file" class="custom-file-input" name="enclosure" id="field_enclosure" [(ngModel)]="resume.enclosure">
             <label class="custom-file-label" jhiTranslate="recruitApp.resume.enclosure" for="field_enclosure">enclosure</label>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
-            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
         <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
             <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>

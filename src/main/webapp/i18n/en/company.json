@@ -6,6 +6,7 @@
                 "title": "Companies",
                 "createLabel": "Create a new Company",
                 "createOrEditLabel": "Create or edit a Company",
+                "editLabel": "Edit a Company",
                 "search": "Search for Company"
             },
             "created": "A new Company is created with identifier {{ param }}",

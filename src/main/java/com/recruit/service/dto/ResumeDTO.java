@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * A DTO for the Resume entity.
  */
-public class ResumeDTO implements Serializable {
+public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
 
     private Long id;
 

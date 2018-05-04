@@ -18,7 +18,7 @@ import com.recruit.domain.enumeration.PositionType;
 @Table(name = "position")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "position")
-public class Position implements Serializable {
+public class Position extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

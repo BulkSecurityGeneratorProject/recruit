@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Position.
     -->
-    <changeSet id="20180501141738-2" author="jhipster">
+    <changeSet id="20180504054714-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="company_id"
                                  baseTableName="position"

@@ -17,7 +17,7 @@
     <!--
         Added the entity Resume.
     -->
-    <changeSet id="20180503042436-1" author="jhipster">
+    <changeSet id="20180504054716-1" author="jhipster">
         <createTable tableName="resume">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -91,6 +91,20 @@
         <dropDefaultValue tableName="resume" columnName="birth" columnDataType="datetime"/>
         <dropDefaultValue tableName="resume" columnName="work_time" columnDataType="datetime"/>
         
+    </changeSet>
+    
+    <!-- Added the entity audit columns -->
+    <changeSet id="20180504054805-audit-1" author="jhipster-entity-audit">
+        <addColumn tableName="resume">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </addColumn>
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

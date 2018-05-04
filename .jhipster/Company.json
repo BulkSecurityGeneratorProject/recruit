@@ -43,7 +43,7 @@
             "fieldType": "Long"
         }
     ],
-    "changelogDate": "20180501141739",
+    "changelogDate": "20180504054715",
     "entityTableName": "company",
     "dto": "mapstruct",
     "pagination": "pagination",

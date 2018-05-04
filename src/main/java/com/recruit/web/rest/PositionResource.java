@@ -1,6 +1,7 @@
 package com.recruit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.recruit.security.SecurityUtils;
 import com.recruit.service.PositionService;
 import com.recruit.web.rest.errors.BadRequestAlertException;
 import com.recruit.web.rest.util.HeaderUtil;
@@ -98,6 +99,23 @@ public class PositionResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/positions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    /**
+     * GET  /positions/company : get all the positions by company.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of positions in body
+     */
+    @GetMapping("/positions/company")
+    @Timed
+    public ResponseEntity<List<PositionDTO>> getAllPositionsByCompany(Pageable pageable) {
+        log.debug("REST request to get a page of Positions By Company");
+        Page<PositionDTO> page = positionService.findAllByLogin(pageable);
+        if(page==null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/positions/company");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /positions/:id : get the "id" position.
@@ -143,5 +161,4 @@ public class PositionResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/positions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
 }

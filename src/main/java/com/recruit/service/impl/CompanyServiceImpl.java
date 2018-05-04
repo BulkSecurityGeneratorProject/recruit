@@ -1,9 +1,9 @@
 package com.recruit.service.impl;
 
-import com.recruit.service.CompanyService;
 import com.recruit.domain.Company;
 import com.recruit.repository.CompanyRepository;
 import com.recruit.repository.search.CompanySearchRepository;
+import com.recruit.service.CompanyService;
 import com.recruit.service.dto.CompanyDTO;
 import com.recruit.service.mapper.CompanyMapper;
 import org.slf4j.Logger;
@@ -13,8 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Company.
@@ -36,6 +35,7 @@ public class CompanyServiceImpl implements CompanyService {
         this.companyMapper = companyMapper;
         this.companySearchRepository = companySearchRepository;
     }
+
 
     /**
      * Save a company.
@@ -80,6 +80,7 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findOne(id);
         return companyMapper.toDto(company);
     }
+
     /**
      * Get one company by user id.
      *
@@ -109,7 +110,7 @@ public class CompanyServiceImpl implements CompanyService {
     /**
      * Search for the company corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

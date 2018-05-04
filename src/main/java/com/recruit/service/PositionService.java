@@ -4,6 +4,8 @@ import com.recruit.service.dto.PositionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 /**
  * Service Interface for managing Position.
  */
@@ -44,9 +46,11 @@ public interface PositionService {
      * Search for the position corresponding to the query.
      *
      * @param query the query of the search
-     * 
+     *
      * @param pageable the pagination information
      * @return the list of entities
      */
     Page<PositionDTO> search(String query, Pageable pageable);
+
+    Page<PositionDTO> findAllByLogin(Pageable pageable);
 }

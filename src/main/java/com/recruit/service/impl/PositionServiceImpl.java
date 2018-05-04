@@ -1,18 +1,25 @@
 package com.recruit.service.impl;
 
+import com.recruit.domain.User;
 import com.recruit.service.PositionService;
 import com.recruit.domain.Position;
 import com.recruit.repository.PositionRepository;
 import com.recruit.repository.search.PositionSearchRepository;
+import com.recruit.service.UserService;
 import com.recruit.service.dto.PositionDTO;
 import com.recruit.service.mapper.PositionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -36,6 +43,9 @@ public class PositionServiceImpl implements PositionService {
         this.positionMapper = positionMapper;
         this.positionSearchRepository = positionSearchRepository;
     }
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Save a position.
@@ -68,6 +78,24 @@ public class PositionServiceImpl implements PositionService {
     }
 
     /**
+     * Get all the positions by login.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PositionDTO> findAllByLogin(Pageable pageable) {
+        Optional<User> user = userService.getUserWithAuthorities();
+        if (user.isPresent()) {
+            log.debug("Request to get all Positions by user {}",user.get());
+            return positionRepository.findAllByCompany_UserId(user.get().getId(), pageable)
+                .map(positionMapper::toDto);
+        }
+        return null;
+    }
+
+    /**
      * Get one position by id.
      *
      * @param id the id of the entity
@@ -96,7 +124,7 @@ public class PositionServiceImpl implements PositionService {
     /**
      * Search for the position corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

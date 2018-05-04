@@ -7,6 +7,7 @@ import { PositionComponent } from './position.component';
 import { PositionDetailComponent } from './position-detail.component';
 import { PositionPopupComponent } from './position-dialog.component';
 import { PositionDeletePopupComponent } from './position-delete-dialog.component';
+import {PositionCompanyComponent} from './position-company.component';
 
 @Injectable()
 export class PositionResolvePagingParams implements Resolve<any> {
@@ -32,7 +33,18 @@ export const positionRoute: Routes = [
             'pagingParams': PositionResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'recruitApp.position.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'position-company',
+        component: PositionCompanyComponent,
+        resolve: {
+            'pagingParams': PositionResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_COMPANY'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -52,7 +64,7 @@ export const positionPopupRoute: Routes = [
         path: 'position-new',
         component: PositionPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_COMPANY'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -62,7 +74,7 @@ export const positionPopupRoute: Routes = [
         path: 'position/:id/edit',
         component: PositionPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_COMPANY'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -72,7 +84,7 @@ export const positionPopupRoute: Routes = [
         path: 'position/:id/delete',
         component: PositionDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_COMPANY'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService],

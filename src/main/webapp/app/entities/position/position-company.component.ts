@@ -1,25 +1,24 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 import {Subscription} from 'rxjs/Subscription';
-import {JhiEventManager, JhiParseLinks, JhiAlertService} from 'ng-jhipster';
-
+import {ITEMS_PER_PAGE, Principal} from '../../shared';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Position} from './position.model';
 import {PositionService} from './position.service';
-import {ITEMS_PER_PAGE, Principal} from '../../shared';
 
 @Component({
-    selector: 'jhi-position',
-    templateUrl: './position.component.html'
+    selector: 'jhi-position-company',
+    templateUrl: './position-company.component.html',
+    styles: []
 })
-export class PositionComponent implements OnInit, OnDestroy {
+export class PositionCompanyComponent implements OnInit, OnDestroy {
 
     currentAccount: any;
     positions: Position[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
-    currentSearch: string;
     routeData: any;
     links: any;
     totalItems: any;
@@ -46,24 +45,10 @@ export class PositionComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search'] ?
-            this.activatedRoute.snapshot.params['search'] : '';
     }
 
     loadAll() {
-        if (this.currentSearch) {
-            this.positionService.search({
-                page: this.page - 1,
-                query: this.currentSearch,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            }).subscribe(
-                (res: HttpResponse<Position[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-            return;
-        }
-        this.positionService.query({
+        this.positionService.queryByCompany({
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()
@@ -81,12 +66,11 @@ export class PositionComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/position'], {
+        this.router.navigate(['/position-company'], {
             queryParams:
                 {
                     page: this.page,
                     size: this.itemsPerPage,
-                    search: this.currentSearch,
                     sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
                 }
         });
@@ -95,28 +79,12 @@ export class PositionComponent implements OnInit, OnDestroy {
 
     clear() {
         this.page = 0;
-        this.currentSearch = '';
-        this.router.navigate(['/position', {
+        this.router.navigate(['/position-company', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
         this.loadAll();
     }
-
-    search(query) {
-        if (!query) {
-            return this.clear();
-        }
-        this.page = 0;
-        this.currentSearch = query;
-        this.router.navigate(['/position', {
-            search: this.currentSearch,
-            page: this.page,
-            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-        }]);
-        this.loadAll();
-    }
-
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
@@ -156,4 +124,5 @@ export class PositionComponent implements OnInit, OnDestroy {
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
+
 }

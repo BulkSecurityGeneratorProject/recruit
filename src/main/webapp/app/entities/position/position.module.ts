@@ -15,7 +15,8 @@ import {
     positionPopupRoute,
     PositionResolvePagingParams,
 } from './';
-import {UEditorModule} from 'ngx-ueditor';
+import { UEditorModule } from 'ngx-ueditor';
+import { PositionCompanyComponent } from './position-company.component';
 
 const ENTITY_STATES = [
     ...positionRoute,
@@ -42,6 +43,7 @@ const ENTITY_STATES = [
         PositionDeleteDialogComponent,
         PositionPopupComponent,
         PositionDeletePopupComponent,
+        PositionCompanyComponent
     ],
     entryComponents: [
         PositionComponent,

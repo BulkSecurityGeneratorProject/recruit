@@ -8,6 +8,8 @@
         </form>
     </div>
     <jhi-alert class="col-md-12"></jhi-alert>
+
+
     <div class="col-md-12 mt-2">
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -49,6 +51,11 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-12 mt-2 text-center" *ngIf="!isAuthenticated()">
+        <h2>{{'global.auth' | translate}}</h2>
+    </div>
+
     <div *ngIf="positions && positions.length"  class="col-md-12 mt-2">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>

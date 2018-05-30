@@ -14,6 +14,7 @@
                 "position": "职位信息",
                 "company": "企业信息",
                 "resume": "简历信息",
+                "delivery": "投递信息",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -107,6 +108,7 @@
             "delete": "删除",
             "edit": "编辑",
             "open": "Open",
+            "delivery": "投递",
             "save": "保存",
             "view": "查看"
         },

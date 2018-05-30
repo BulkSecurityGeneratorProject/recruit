@@ -3,6 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RecruitPositionModule } from './position/position.module';
 import { RecruitCompanyModule } from './company/company.module';
 import { RecruitResumeModule } from './resume/resume.module';
+import { RecruitDeliveryModule } from './delivery/delivery.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -10,6 +11,7 @@ import { RecruitResumeModule } from './resume/resume.module';
         RecruitPositionModule,
         RecruitCompanyModule,
         RecruitResumeModule,
+        RecruitDeliveryModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

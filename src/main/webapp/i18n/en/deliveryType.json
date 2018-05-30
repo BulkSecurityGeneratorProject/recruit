@@ -1,0 +1,10 @@
+{
+    "recruitApp": {
+        "DeliveryType" : {
+            "null": "",
+            "DELIVERED": "DELIVERED",
+            "THROUGH": "THROUGH",
+            "FAIL": "FAIL"
+        }
+    }
+}

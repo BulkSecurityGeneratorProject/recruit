@@ -1,0 +1,26 @@
+
+{
+    "recruitApp": {
+        "delivery" : {
+            "home": {
+                "title": "投递信息",
+                "createLabel": "创建新 投递信息",
+                "createOrEditLabel": "创建或编辑 投递信息",
+                "search": "查找 投递信息"
+            },
+            "created": "投递信息 {{ param }} 创建成功",
+            "updated": "投递信息 {{ param }} 更新成功",
+            "deleted": "投递信息 {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 投递信息 {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "投递信息"
+            },
+            "userID": "用户ID",
+            "positionID": "职位ID",
+            "status": "状态",
+            "timestamp": "时间"
+        }
+    }
+}

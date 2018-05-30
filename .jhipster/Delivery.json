@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "userID",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "positionID",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "DeliveryType",
+            "fieldValues": "DELIVERED,THROUGH,FAIL"
+        },
+        {
+            "fieldName": "timestamp",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180530051145",
+    "entityTableName": "delivery",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,10 @@
+{
+    "recruitApp": {
+        "DeliveryType" : {
+            "null": "",
+            "DELIVERED": "已投递",
+            "THROUGH": "通过，等待企业联系",
+            "FAIL": "失败"
+        }
+    }
+}

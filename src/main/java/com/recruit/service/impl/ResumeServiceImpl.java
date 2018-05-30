@@ -1,13 +1,16 @@
 package com.recruit.service.impl;
 
+import com.recruit.security.SecurityUtils;
 import com.recruit.service.ResumeService;
 import com.recruit.domain.Resume;
 import com.recruit.repository.ResumeRepository;
 import com.recruit.repository.search.ResumeSearchRepository;
+import com.recruit.service.UserService;
 import com.recruit.service.dto.ResumeDTO;
 import com.recruit.service.mapper.ResumeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,6 +39,9 @@ public class ResumeServiceImpl implements ResumeService {
         this.resumeMapper = resumeMapper;
         this.resumeSearchRepository = resumeSearchRepository;
     }
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Save a resume.
@@ -80,6 +86,7 @@ public class ResumeServiceImpl implements ResumeService {
         Resume resume = resumeRepository.findOne(id);
         return resumeMapper.toDto(resume);
     }
+
     /**
      * Get one resume by userId.
      *
@@ -93,6 +100,7 @@ public class ResumeServiceImpl implements ResumeService {
         Resume resume = resumeRepository.findOneByUserId(id);
         return resumeMapper.toDto(resume);
     }
+
 
     /**
      * Delete the resume by id.
@@ -109,7 +117,7 @@ public class ResumeServiceImpl implements ResumeService {
     /**
      * Search for the resume corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

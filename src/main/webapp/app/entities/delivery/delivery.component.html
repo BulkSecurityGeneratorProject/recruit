@@ -1,10 +1,10 @@
 <div>
     <h2>
-        <span jhiTranslate="recruitApp.position.home.title">Positions</span>
-        <button class="btn btn-primary float-right jh-create-entity create-position" [routerLink]="['/', { outlets: { popup: ['position-new'] } }]">
+        <span jhiTranslate="recruitApp.delivery.home.title">Deliveries</span>
+        <button class="btn btn-primary float-right jh-create-entity create-delivery" [routerLink]="['/', { outlets: { popup: ['delivery-new'] } }]">
             <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down"  jhiTranslate="recruitApp.position.home.createLabel">
-            Create new Position
+            <span class="hidden-sm-down"  jhiTranslate="recruitApp.delivery.home.createLabel">
+            Create new Delivery
             </span>
         </button>
     </h2>
@@ -13,7 +13,7 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'recruitApp.position.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'recruitApp.delivery.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <span class="fa fa-search"></span>
                     </button>
@@ -25,47 +25,35 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="positions">
+    <div class="table-responsive" *ngIf="deliveries">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span jhiTranslate="recruitApp.position.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="place"><span jhiTranslate="recruitApp.position.place">Place</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="experience"><span jhiTranslate="recruitApp.position.experience">Experience</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="education"><span jhiTranslate="recruitApp.position.education">Education</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="salary"><span jhiTranslate="recruitApp.position.salary">Salary</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="type"><span jhiTranslate="recruitApp.position.type">Type</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="order"><span jhiTranslate="recruitApp.position.order">Order</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="companyId"><span jhiTranslate="recruitApp.position.company">Company</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userID"><span jhiTranslate="recruitApp.delivery.userID">User ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="positionID"><span jhiTranslate="recruitApp.delivery.positionID">Position ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span jhiTranslate="recruitApp.delivery.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="timestamp"><span jhiTranslate="recruitApp.delivery.timestamp">Timestamp</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let position of positions ;trackBy: trackId">
-                <td><a [routerLink]="['../position', position.id ]">{{position.id}}</a></td>
-                <td>{{position.name}}</td>
-                <td>{{position.place}}</td>
-                <td>{{position.experience}}</td>
-                <td>{{position.education}}</td>
-                <td>{{position.salary}}</td>
-                <td jhiTranslate="{{'recruitApp.PositionType.' + position.type}}">{{position.type}}</td>
-                <td>{{position.order}}</td>
-                <td>
-                    <div *ngIf="position.companyId">
-                        <a [routerLink]="['../company', position.companyId  ]" >{{position.companyId}}</a>
-                    </div>
-                </td>
+            <tr *ngFor="let delivery of deliveries ;trackBy: trackId">
+                <td><a [routerLink]="['../delivery', delivery.id ]">{{delivery.id}}</a></td>
+                <td><a [routerLink]="['../user-management', delivery.userID ]">{{delivery.userID}}</a></td>
+                <td><a [routerLink]="['../position', delivery.positionID ]">{{delivery.positionID}}</a></td>
+                <td jhiTranslate="{{'recruitApp.DeliveryType.' + delivery.status}}">{{delivery.status}}</td>
+                <td>{{delivery.timestamp | date:'MM-dd hh:mm'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../position', position.id ]"
+                                [routerLink]="['../delivery', delivery.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'position/'+ position.id + '/edit'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'delivery/'+ delivery.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm">
@@ -73,7 +61,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'position/'+ position.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'delivery/'+ delivery.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -86,7 +74,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="positions && positions.length">
+    <div *ngIf="deliveries && deliveries.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

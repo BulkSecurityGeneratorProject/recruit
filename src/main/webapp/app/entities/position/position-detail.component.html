@@ -2,6 +2,7 @@
 <div *ngIf="position">
     <h2><span jhiTranslate="recruitApp.position.detail.title">Position</span> {{position.id}}</h2>
     <hr>
+    <jhi-alert></jhi-alert>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="recruitApp.position.name">Name</span></dt>
@@ -10,7 +11,7 @@
         </dd>
         <dt><span jhiTranslate="recruitApp.position.describe">Describe</span></dt>
         <dd>
-            <span>{{position.describe}}</span>
+            <span [innerHTML]="position.describe"></span>
         </dd>
         <dt><span jhiTranslate="recruitApp.position.place">Place</span></dt>
         <dd>
@@ -50,7 +51,10 @@
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    <button type="button"
+            [disabled]="isSaving||delivery.id!=undefined"
+            (click)="deliveryPosition()"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.delivery"> Delivery</span>
     </button>
 </div>

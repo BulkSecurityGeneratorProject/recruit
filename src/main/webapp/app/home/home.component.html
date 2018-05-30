@@ -40,7 +40,7 @@
         <div class="card mt-2" *ngFor="let pos of positions" style="width: 19%; margin-left: 0.5%;margin-right: 0.5%">
             <div class="card-body">
                 <h5 class="card-title">{{pos.name}}</h5>
-                <p class="card-text">{{pos.describe}}</p>
+                <p class="card-text" [innerHTML]="pos.describe">{{pos.describe}}</p>
             </div>
             <div class="card-footer">
                 <small class="text-muted">{{'recruitApp.PositionType.' + pos.type| translate}}</small>

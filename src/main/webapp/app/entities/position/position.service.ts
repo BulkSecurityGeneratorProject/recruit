@@ -43,6 +43,11 @@ export class PositionService {
         return this.http.get<Position[]>(`${this.resourceUrl}/company`, { params: options, observe: 'response' })
             .map((res: HttpResponse<Position[]>) => this.convertArrayResponse(res));
     }
+    queryByType(req?: any): Observable<HttpResponse<Position[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Position[]>(`${this.resourceUrl}/type`, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Position[]>) => this.convertArrayResponse(res));
+    }
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});

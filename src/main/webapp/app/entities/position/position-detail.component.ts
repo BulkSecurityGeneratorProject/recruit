@@ -6,18 +6,20 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Position } from './position.model';
 import { PositionService } from './position.service';
+import {Account, Principal} from '../../shared';
 
 @Component({
     selector: 'jhi-position-detail',
     templateUrl: './position-detail.component.html'
 })
 export class PositionDetailComponent implements OnInit, OnDestroy {
-
+    account: Account;
     position: Position;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     constructor(
+        private principal: Principal,
         private eventManager: JhiEventManager,
         private positionService: PositionService,
         private route: ActivatedRoute
@@ -25,6 +27,9 @@ export class PositionDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.principal.identity().then((account) => {
+            this.account = account;
+        });
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
         });

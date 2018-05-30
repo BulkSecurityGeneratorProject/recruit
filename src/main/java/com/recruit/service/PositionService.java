@@ -1,5 +1,6 @@
 package com.recruit.service;
 
+import com.recruit.domain.enumeration.PositionType;
 import com.recruit.service.dto.PositionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,14 @@ public interface PositionService {
      * @return the list of entities
      */
     Page<PositionDTO> findAll(Pageable pageable);
+
+    /**
+     * Get all the positions by type.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<PositionDTO> findAllByType(PositionType type,Pageable pageable);
 
     /**
      * Get the "id" position.

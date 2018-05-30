@@ -1,6 +1,7 @@
 package com.recruit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.recruit.domain.enumeration.PositionType;
 import com.recruit.security.SecurityUtils;
 import com.recruit.service.PositionService;
 import com.recruit.web.rest.errors.BadRequestAlertException;
@@ -97,6 +98,20 @@ public class PositionResource {
         log.debug("REST request to get a page of Positions");
         Page<PositionDTO> page = positionService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/positions");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /positions/type : get all the positions.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of positions in body
+     */
+    @GetMapping("/positions/type")
+    @Timed
+    public ResponseEntity<List<PositionDTO>> getAllPositionsByType(@RequestParam PositionType type, Pageable pageable) {
+        log.debug("REST request to get a page of Positions by type {}",type);
+        Page<PositionDTO> page = positionService.findAllByType(type,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/positions/type");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     /**

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { RecruitSharedModule } from '../shared';
 
 import { HOME_ROUTE, HomeComponent } from './';
+import {PositionService} from '../entities/position';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { HOME_ROUTE, HomeComponent } from './';
     entryComponents: [
     ],
     providers: [
+        PositionService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

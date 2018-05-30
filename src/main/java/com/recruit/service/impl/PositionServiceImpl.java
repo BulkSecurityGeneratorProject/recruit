@@ -1,6 +1,7 @@
 package com.recruit.service.impl;
 
 import com.recruit.domain.User;
+import com.recruit.domain.enumeration.PositionType;
 import com.recruit.service.PositionService;
 import com.recruit.domain.Position;
 import com.recruit.repository.PositionRepository;
@@ -74,6 +75,19 @@ public class PositionServiceImpl implements PositionService {
     public Page<PositionDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Positions");
         return positionRepository.findAll(pageable)
+            .map(positionMapper::toDto);
+    }
+    /**
+     * Get all the positions by type.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PositionDTO> findAllByType(PositionType type,Pageable pageable) {
+        log.debug("Request to get all Positions by type {}",type);
+        return positionRepository.findAllByType(type,pageable)
             .map(positionMapper::toDto);
     }
 

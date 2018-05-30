@@ -1,125 +1,60 @@
 <div class="row">
     <div class="col-md-12">
         <form class="form-inline d-flex justify-content-center">
-            <input type="text" class="form-control form-control-lg w-60" id="search" placeholder="Search">
-            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+            <input type="text" class="form-control form-control-lg w-60" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch"
+                   placeholder="{{'global.search' | translate}}">
+            <button class="btn btn-primary btn-lg" (click)="search(currentSearch)">{{'global.search' | translate}}</button>
+            <button class="btn btn-lg btn-danger" (click)="clear()" *ngIf="currentSearch">{{'global.clear' | translate}}</button>
         </form>
     </div>
+    <jhi-alert class="col-md-12"></jhi-alert>
+    <div class="col-md-12 mt-2">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':type=='COMPUTER'}" href="javascript:;" (click)="navChange('COMPUTER')">{{'recruitApp.PositionType.COMPUTER' | translate}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':type=='INTERNET'}" href="javascript:;" (click)="navChange('INTERNET')">{{'recruitApp.PositionType.INTERNET' | translate}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':type=='MEDICAL'}" href="javascript:;" (click)="navChange('MEDICAL')">{{'recruitApp.PositionType.MEDICAL' | translate}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':type=='REALTY'}" href="javascript:;" (click)="navChange('REALTY')">{{'recruitApp.PositionType.REALTY' | translate}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':type=='AD'}" href="javascript:;" (click)="navChange('AD')">{{'recruitApp.PositionType.AD' | translate}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':type=='OTHER'}" href="javascript:;" (click)="navChange('OTHER')">{{'recruitApp.PositionType.OTHER' | translate}}</a>
+            </li>
+            <li class="nav-item" *ngIf="currentSearch">
+                <a class="nav-link" [ngClass]="{'active':type=='SEARCH'}" href="javascript:;" (click)="navChange('SEARCH')">{{'global.search' | translate}}</a>
+            </li>
+        </ul>
+    </div>
 
-    <ngb-tabset class="col-md-12">
-        <ngb-tab title="Simple">
-            <ng-template ngbTabContent>
-                <div class="card-group">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-group">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </ngb-tab>
-        <ngb-tab>
-            <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
-            <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-                    craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-                    cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-                    yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-                    shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
-                    sint qui sapiente accusamus tattooed echo park.</p>
-            </ng-template>
-        </ngb-tab>
-        <ngb-tab title="Disabled">
-            <ng-template ngbTabContent>
-                <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi. Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna, egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
-            </ng-template>
-        </ngb-tab>
-    </ngb-tabset>
+    <div class="col-md-12 d-flex justify-content-start flex-wrap">
+        <div class="card mt-2" *ngFor="let pos of positions" style="width: 19%; margin-left: 0.5%;margin-right: 0.5%">
+            <div class="card-body">
+                <h5 class="card-title">{{pos.name}}</h5>
+                <p class="card-text">{{pos.describe}}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{'recruitApp.PositionType.' + pos.type| translate}}</small>
+                <small class="text-muted float-right">
+                    <a [routerLink]="['position', pos.id ]">{{'global.more' | translate}}</a>
+                </small>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="positions && positions.length"  class="col-md-12 mt-2">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
 </div>

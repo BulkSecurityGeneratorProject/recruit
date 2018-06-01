@@ -20,8 +20,8 @@ export class UserService {
         return this.http.put<User>(this.resourceUrl, user, { observe: 'response' });
     }
 
-    find(login: string): Observable<HttpResponse<User>> {
-        return this.http.get<User>(`${this.resourceUrl}/${login}`, { observe: 'response' });
+    find(id: number): Observable<HttpResponse<User>> {
+        return this.http.get<User>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
     query(req?: any): Observable<HttpResponse<User[]>> {

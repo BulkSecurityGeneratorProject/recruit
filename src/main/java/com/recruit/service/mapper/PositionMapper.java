@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface PositionMapper extends EntityMapper<PositionDTO, Position> {
 
     @Mapping(source = "company.id", target = "companyId")
+    @Mapping(source = "company.name", target = "companyName")
     PositionDTO toDto(Position position);
 
     @Mapping(source = "companyId", target = "company")

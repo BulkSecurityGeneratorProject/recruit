@@ -40,8 +40,8 @@
             <tbody>
             <tr *ngFor="let delivery of deliveries ;trackBy: trackId">
                 <td><a [routerLink]="['../delivery', delivery.id ]">{{delivery.id}}</a></td>
-                <td><a [routerLink]="['../user-management', delivery.userID ]">{{delivery.userID}}</a></td>
-                <td><a [routerLink]="['../position', delivery.positionID ]">{{delivery.positionID}}</a></td>
+                <td><a [routerLink]="['../resume', delivery.resumeID ]">{{delivery.userName}}</a></td>
+                <td><a [routerLink]="['../position', delivery.positionID ]">{{delivery.positionName}}</a></td>
                 <td jhiTranslate="{{'recruitApp.DeliveryType.' + delivery.status}}">{{delivery.status}}</td>
                 <td>{{delivery.timestamp | date:'MM-dd hh:mm'}}</td>
                 <td class="text-right">

@@ -62,7 +62,7 @@
                 <td>{{resume.education}}</td>
                 <td>{{resume.targetSalary}}</td>
                 <td>{{resume.targetPosition}}</td>
-                <td>{{resume.userId}}</td>
+                <td><a [routerLink]="['../user-management', resume.userId ]">{{resume.userName}}</a></td>
                 <td>{{resume.enclosure}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

@@ -7,6 +7,8 @@ import { DeliveryComponent } from './delivery.component';
 import { DeliveryDetailComponent } from './delivery-detail.component';
 import { DeliveryPopupComponent } from './delivery-dialog.component';
 import { DeliveryDeletePopupComponent } from './delivery-delete-dialog.component';
+import {DeliveryCompanyComponent} from './delivery-company.component';
+import {DeliveryUserComponent} from './delivery-user.component';
 
 @Injectable()
 export class DeliveryResolvePagingParams implements Resolve<any> {
@@ -28,6 +30,28 @@ export const deliveryRoute: Routes = [
     {
         path: 'delivery',
         component: DeliveryComponent,
+        resolve: {
+            'pagingParams': DeliveryResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'recruitApp.delivery.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'delivery-company',
+        component: DeliveryCompanyComponent,
+        resolve: {
+            'pagingParams': DeliveryResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_COMPANY'],
+            pageTitle: 'recruitApp.delivery.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'delivery-user',
+        component: DeliveryUserComponent,
         resolve: {
             'pagingParams': DeliveryResolvePagingParams
         },

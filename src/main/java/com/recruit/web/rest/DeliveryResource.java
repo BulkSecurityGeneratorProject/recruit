@@ -1,6 +1,7 @@
 package com.recruit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.recruit.domain.enumeration.DeliveryType;
 import com.recruit.service.DeliveryService;
 import com.recruit.web.rest.errors.BadRequestAlertException;
 import com.recruit.web.rest.util.HeaderUtil;
@@ -56,6 +57,7 @@ public class DeliveryResource {
         if (deliveryDTO.getId() != null) {
             throw new BadRequestAlertException("A new delivery cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        deliveryDTO.setStatus(DeliveryType.DELIVERED);
         DeliveryDTO result = deliveryService.save(deliveryDTO);
         return ResponseEntity.created(new URI("/api/deliveries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -99,6 +101,24 @@ public class DeliveryResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/deliveries/company")
+    @Timed
+    public ResponseEntity<List<DeliveryDTO>> getAllDeliveriesByCompany(Pageable pageable) {
+        log.debug("REST request to get a page of Deliveries");
+        Page<DeliveryDTO> page = deliveryService.findAllByUserCompany(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries/company");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/deliveries/user")
+    @Timed
+    public ResponseEntity<List<DeliveryDTO>> getAllDeliveriesByUser(Pageable pageable) {
+        log.debug("REST request to get a page of Deliveries");
+        Page<DeliveryDTO> page = deliveryService.findAllByUser(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries/company");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     /**
      * GET  /deliveries/:id : get the "id" delivery.
      *
@@ -112,11 +132,12 @@ public class DeliveryResource {
         DeliveryDTO deliveryDTO = deliveryService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(deliveryDTO));
     }
+
     @GetMapping("/deliveries/position/user")
     @Timed
-    public DeliveryDTO getDeliveryByPositionAndUser(@RequestParam Long userId,@RequestParam Long posId) {
-        log.debug("REST request to get Delivery : user id is {}, pos id is {}", userId,posId);
-        return deliveryService.findOneByPositionIdAndUserId(posId,userId);
+    public DeliveryDTO getDeliveryByPositionAndUser(@RequestParam Long userId, @RequestParam Long posId) {
+        log.debug("REST request to get Delivery : user id is {}, pos id is {}", userId, posId);
+        return deliveryService.findOneByPositionIdAndUserId(posId, userId);
     }
 
     /**
@@ -137,7 +158,7 @@ public class DeliveryResource {
      * SEARCH  /_search/deliveries?query=:query : search for the delivery corresponding
      * to the query.
      *
-     * @param query the query of the delivery search
+     * @param query    the query of the delivery search
      * @param pageable the pagination information
      * @return the result of the search
      */

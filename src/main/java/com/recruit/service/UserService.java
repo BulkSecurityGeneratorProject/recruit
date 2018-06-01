@@ -2,17 +2,21 @@ package com.recruit.service;
 
 import com.recruit.domain.Authority;
 import com.recruit.domain.User;
+import com.recruit.domain.enumeration.CompanyType;
 import com.recruit.repository.AuthorityRepository;
 import com.recruit.config.Constants;
 import com.recruit.repository.UserRepository;
 import com.recruit.repository.search.UserSearchRepository;
 import com.recruit.security.AuthoritiesConstants;
 import com.recruit.security.SecurityUtils;
+import com.recruit.service.dto.CompanyDTO;
+import com.recruit.service.dto.ResumeDTO;
 import com.recruit.service.util.RandomUtil;
 import com.recruit.service.dto.UserDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,6 +57,10 @@ public class UserService {
         this.cacheManager = cacheManager;
     }
 
+    @Autowired
+    private ResumeService resumeService;
+    @Autowired
+    private CompanyService companyService;
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository.findOneByActivationKey(key)
@@ -115,7 +123,20 @@ public class UserService {
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
+        newUser=userRepository.save(newUser);
+        if(company){
+            //新建企业信息
+            CompanyDTO companyDTO = new CompanyDTO();
+            companyDTO.setUserId(newUser.getId());
+            companyDTO.setType(CompanyType.OTHER);
+            companyService.save(companyDTO);
+        }else{
+            //生成一份个人简历
+            ResumeDTO resumeDTO = new ResumeDTO();
+            resumeDTO.setUserId(newUser.getId());
+            resumeService.save(resumeDTO);
+        }
+
         userSearchRepository.save(newUser);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
@@ -146,7 +167,20 @@ public class UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
-        userRepository.save(user);
+        user= userRepository.save(user);
+        if(userDTO.getAuthorities().contains(AuthoritiesConstants.COMPANY)){
+            //新建企业信息
+            CompanyDTO companyDTO = new CompanyDTO();
+            companyDTO.setUserId(user.getId());
+            companyDTO.setType(CompanyType.OTHER);
+            companyService.save(companyDTO);
+        }else{
+            //生成一份个人简历
+            ResumeDTO resumeDTO = new ResumeDTO();
+            resumeDTO.setUserId(user.getId());
+            resumeService.save(resumeDTO);
+        }
+
         userSearchRepository.save(user);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(user.getEmail());
@@ -210,8 +244,8 @@ public class UserService {
             .map(UserDTO::new);
     }
 
-    public void deleteUser(String login) {
-        userRepository.findOneByLogin(login).ifPresent(user -> {
+    public void deleteUser(Long id) {
+        userRepository.findOneWithAuthoritiesById(id).ifPresent(user -> {
             userRepository.delete(user);
             userSearchRepository.delete(user);
             cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
@@ -240,6 +274,10 @@ public class UserService {
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);
+    }
+    @Transactional(readOnly = true)
+    public Optional<User> getUserWithAuthoritiesById(Long id) {
+        return userRepository.findOneWithAuthoritiesById(id);
     }
 
     @Transactional(readOnly = true)

@@ -2,6 +2,7 @@ package com.recruit.service.impl;
 
 import com.recruit.domain.User;
 import com.recruit.domain.enumeration.PositionType;
+import com.recruit.service.CompanyService;
 import com.recruit.service.PositionService;
 import com.recruit.domain.Position;
 import com.recruit.repository.PositionRepository;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -48,6 +51,9 @@ public class PositionServiceImpl implements PositionService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CompanyService companyService;
+
     /**
      * Save a position.
      *
@@ -57,6 +63,10 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public PositionDTO save(PositionDTO positionDTO) {
         log.debug("Request to save Position : {}", positionDTO);
+        Optional<User> user = userService.getUserWithAuthorities();
+        if (positionDTO.getId() == null && user.isPresent()) {
+            positionDTO.setCompanyId(companyService.findByUserId(user.get().getId()).getId());
+        }
         Position position = positionMapper.toEntity(positionDTO);
         position = positionRepository.save(position);
         PositionDTO result = positionMapper.toDto(position);
@@ -77,6 +87,7 @@ public class PositionServiceImpl implements PositionService {
         return positionRepository.findAll(pageable)
             .map(positionMapper::toDto);
     }
+
     /**
      * Get all the positions by type.
      *
@@ -85,9 +96,9 @@ public class PositionServiceImpl implements PositionService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<PositionDTO> findAllByType(PositionType type,Pageable pageable) {
-        log.debug("Request to get all Positions by type {}",type);
-        return positionRepository.findAllByType(type,pageable)
+    public Page<PositionDTO> findAllByType(PositionType type, Pageable pageable) {
+        log.debug("Request to get all Positions by type {}", type);
+        return positionRepository.findAllByType(type, pageable)
             .map(positionMapper::toDto);
     }
 
@@ -102,11 +113,22 @@ public class PositionServiceImpl implements PositionService {
     public Page<PositionDTO> findAllByLogin(Pageable pageable) {
         Optional<User> user = userService.getUserWithAuthorities();
         if (user.isPresent()) {
-            log.debug("Request to get all Positions by user {}",user.get());
+            log.debug("Request to get all Positions by user {}", user.get());
             return positionRepository.findAllByCompany_UserId(user.get().getId(), pageable)
                 .map(positionMapper::toDto);
         }
         return null;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Long> findAllIdsByLogin() {
+        List<Long> positions = new ArrayList<>();
+        userService.getUserWithAuthorities().ifPresent(user -> {
+            log.debug("Request to get all Positions by user {}", user);
+            positionRepository.findAllByCompany_UserId(user.getId()).forEach(v -> positions.add(v.getId()));
+        });
+        return positions;
     }
 
     /**

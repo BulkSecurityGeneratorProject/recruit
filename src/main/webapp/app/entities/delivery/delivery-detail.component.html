@@ -6,11 +6,11 @@
     <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="recruitApp.delivery.userID">User ID</span></dt>
         <dd>
-            <span>{{delivery.userID}}</span>
+            <span><a [routerLink]="['../resume', delivery.resumeID ]">{{delivery.userName}}</a></span>
         </dd>
         <dt><span jhiTranslate="recruitApp.delivery.positionID">Position ID</span></dt>
         <dd>
-            <span>{{delivery.positionID}}</span>
+            <span><a [routerLink]="['../position', delivery.positionID ]">{{delivery.positionName}}</a></span>
         </dd>
         <dt><span jhiTranslate="recruitApp.delivery.status">Status</span></dt>
         <dd>
@@ -18,7 +18,7 @@
         </dd>
         <dt><span jhiTranslate="recruitApp.delivery.timestamp">Timestamp</span></dt>
         <dd>
-            <span>{{delivery.timestamp | date:'medium'}}</span>
+            <span>{{delivery.timestamp | date:'MM-dd hh:mm'}}</span>
         </dd>
     </dl>
 

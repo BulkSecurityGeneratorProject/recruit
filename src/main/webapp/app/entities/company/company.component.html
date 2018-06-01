@@ -47,7 +47,7 @@
                 <td>{{company.financing}}</td>
                 <td>{{company.personNumber}}</td>
                 <td>{{company.address}}</td>
-                <td>{{company.userId}}</td>
+                <td><a [routerLink]="['../user-management', company.userId ]">{{company.userName}}</a></td>
                 <td jhiTranslate="{{'recruitApp.CompanyType.' + company.type}}">{{company.type}}</td>
                 <td>{{company.order}}</td>
                 <td class="text-right">

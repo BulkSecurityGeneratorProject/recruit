@@ -1,13 +1,17 @@
 package com.recruit.service.impl;
 
-import com.recruit.service.DeliveryService;
+import com.recruit.domain.User;
+import com.recruit.service.*;
 import com.recruit.domain.Delivery;
 import com.recruit.repository.DeliveryRepository;
 import com.recruit.repository.search.DeliverySearchRepository;
+import com.recruit.service.dto.CompanyDTO;
 import com.recruit.service.dto.DeliveryDTO;
+import com.recruit.service.dto.ResumeDTO;
 import com.recruit.service.mapper.DeliveryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -38,6 +44,13 @@ public class DeliveryServiceImpl implements DeliveryService {
         this.deliveryMapper = deliveryMapper;
         this.deliverySearchRepository = deliverySearchRepository;
     }
+
+    @Autowired
+    private PositionService positionService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ResumeService resumeService;
 
     /**
      * Save a delivery.
@@ -66,8 +79,8 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Transactional(readOnly = true)
     public Page<DeliveryDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Deliveries");
-        return deliveryRepository.findAll(pageable)
-            .map(deliveryMapper::toDto);
+        Page<Delivery> result = deliveryRepository.findAll(pageable);
+        return convert(result);
     }
 
     /**
@@ -81,7 +94,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     public DeliveryDTO findOne(Long id) {
         log.debug("Request to get Delivery : {}", id);
         Delivery delivery = deliveryRepository.findOne(id);
-        return deliveryMapper.toDto(delivery);
+        return convert(delivery);
     }
 
     /**
@@ -99,7 +112,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     /**
      * Search for the delivery corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
@@ -108,12 +121,50 @@ public class DeliveryServiceImpl implements DeliveryService {
     public Page<DeliveryDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Deliveries for query {}", query);
         Page<Delivery> result = deliverySearchRepository.search(queryStringQuery(query), pageable);
-        return result.map(deliveryMapper::toDto);
+        return convert(result);
     }
 
     @Override
     public DeliveryDTO findOneByPositionIdAndUserId(Long posId, Long userId) {
-        Delivery delivery = deliveryRepository.findOneByUserIDAndPositionID(userId,posId);
-        return deliveryMapper.toDto(delivery);
+        Delivery delivery = deliveryRepository.findOneByUserIDAndPositionID(userId, posId);
+        return convert(delivery);
+    }
+
+    @Override
+    public Page<DeliveryDTO> findAllByUserCompany(Pageable pageable) {
+        List<Long> posIds = positionService.findAllIdsByLogin();
+        log.debug("find pos ids {}", posIds);
+        Page<Delivery> result = deliveryRepository.findAllByPositionIDIn(posIds, pageable);
+        return convert(result);
+    }
+
+    @Override
+    public Page<DeliveryDTO> findAllByUser(Pageable pageable) {
+        Optional<User> user = userService.getUserWithAuthorities();
+        if (user.isPresent()) {
+            Page<Delivery> result = deliveryRepository.findAllByUserID(user.get().getId(), pageable);
+            return convert(result);
+        }
+        return null;
+    }
+
+    private Page<DeliveryDTO> convert(Page<Delivery> result) {
+        return result.map(this::convert);
+    }
+
+    private DeliveryDTO convert(Delivery delivery) {
+        if(delivery==null){
+            return null;
+        }
+        DeliveryDTO deliveryDTO = deliveryMapper.toDto(delivery);
+        userService.getUserWithAuthorities(deliveryDTO.getUserID()).ifPresent(user -> {
+            deliveryDTO.setUserName(user.getLastName() + user.getFirstName());
+            ResumeDTO resumeDTO = resumeService.findByUserId(user.getId());
+            if (resumeDTO != null) {
+                deliveryDTO.setResumeID(resumeDTO.getId());
+            }
+        });
+        deliveryDTO.setPositionName(positionService.findOne(delivery.getPositionID()).getName());
+        return deliveryDTO;
     }
 }

@@ -70,7 +70,12 @@ public class ResumeServiceImpl implements ResumeService {
     public Page<ResumeDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Resumes");
         return resumeRepository.findAll(pageable)
-            .map(resumeMapper::toDto);
+            .map(v->{
+                ResumeDTO resumeDTO=resumeMapper.toDto(v);
+                userService.getUserWithAuthorities(resumeDTO.getUserId())
+                    .ifPresent(x-> resumeDTO.setUserName(x.getLastName()+x.getFirstName()));
+                return resumeDTO;
+            });
     }
 
     /**
@@ -84,7 +89,9 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeDTO findOne(Long id) {
         log.debug("Request to get Resume : {}", id);
         Resume resume = resumeRepository.findOne(id);
-        return resumeMapper.toDto(resume);
+        ResumeDTO resumeDTO= resumeMapper.toDto(resume);
+        userService.getUserWithAuthorities(resumeDTO.getUserId()).ifPresent(v-> resumeDTO.setUserName(v.getLastName()+v.getFirstName()));
+        return resumeDTO;
     }
 
     /**
@@ -98,7 +105,10 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeDTO findByUserId(Long id) {
         log.debug("Request to get Resume By UserId : {}", id);
         Resume resume = resumeRepository.findOneByUserId(id);
-        return resumeMapper.toDto(resume);
+        ResumeDTO resumeDTO= resumeMapper.toDto(resume);
+        userService.getUserWithAuthorities(resumeDTO.getUserId())
+            .ifPresent(v-> resumeDTO.setUserName(v.getLastName()+v.getFirstName()));
+        return resumeDTO;
     }
 
 
@@ -126,6 +136,11 @@ public class ResumeServiceImpl implements ResumeService {
     public Page<ResumeDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Resumes for query {}", query);
         Page<Resume> result = resumeSearchRepository.search(queryStringQuery(query), pageable);
-        return result.map(resumeMapper::toDto);
+        return result .map(v->{
+            ResumeDTO resumeDTO=resumeMapper.toDto(v);
+            userService.getUserWithAuthorities(resumeDTO.getUserId())
+                .ifPresent(x-> resumeDTO.setUserName(x.getLastName()+x.getFirstName()));
+            return resumeDTO;
+        });
     }
 }

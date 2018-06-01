@@ -24,6 +24,8 @@ public class CompanyDTO extends AbstractAuditingDTO implements Serializable {
 
     private Long userId;
 
+    private String userName;
+
     private CompanyType type;
 
     private Long order;
@@ -100,6 +102,14 @@ public class CompanyDTO extends AbstractAuditingDTO implements Serializable {
         this.order = order;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -131,6 +141,7 @@ public class CompanyDTO extends AbstractAuditingDTO implements Serializable {
             ", describe='" + getDescribe() + "'" +
             ", address='" + getAddress() + "'" +
             ", userId=" + getUserId() +
+            ", userName=" + getUserName() +
             ", type='" + getType() + "'" +
             ", order=" + getOrder() +
             "}";

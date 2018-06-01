@@ -4,10 +4,12 @@ import com.recruit.domain.Company;
 import com.recruit.repository.CompanyRepository;
 import com.recruit.repository.search.CompanySearchRepository;
 import com.recruit.service.CompanyService;
+import com.recruit.service.UserService;
 import com.recruit.service.dto.CompanyDTO;
 import com.recruit.service.mapper.CompanyMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,8 @@ public class CompanyServiceImpl implements CompanyService {
         this.companySearchRepository = companySearchRepository;
     }
 
+    @Autowired
+    private UserService userService;
 
     /**
      * Save a company.
@@ -64,7 +68,12 @@ public class CompanyServiceImpl implements CompanyService {
     public Page<CompanyDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Companies");
         return companyRepository.findAll(pageable)
-            .map(companyMapper::toDto);
+            .map(v->{
+                CompanyDTO companyDTO= companyMapper.toDto(v);
+                userService.getUserWithAuthorities(companyDTO.getUserId())
+                    .ifPresent(x-> companyDTO.setUserName(x.getLastName()+x.getFirstName()));
+                return companyDTO;
+            });
     }
 
     /**
@@ -78,7 +87,11 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyDTO findOne(Long id) {
         log.debug("Request to get Company : {}", id);
         Company company = companyRepository.findOne(id);
-        return companyMapper.toDto(company);
+        CompanyDTO companyDTO = companyMapper.toDto(company);
+        userService.getUserWithAuthorities(companyDTO.getUserId()).ifPresent(v->{
+            companyDTO.setUserName(v.getLastName()+v.getFirstName());
+        });
+        return companyDTO;
     }
 
     /**
@@ -92,7 +105,11 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyDTO findByUserId(Long id) {
         log.debug("Request to get Company By UserId: {}", id);
         Company company = companyRepository.findOneByUserId(id);
-        return companyMapper.toDto(company);
+        CompanyDTO companyDTO = companyMapper.toDto(company);
+        userService.getUserWithAuthorities(companyDTO.getUserId()).ifPresent(v->{
+            companyDTO.setUserName(v.getLastName()+v.getFirstName());
+        });
+        return companyDTO;
     }
 
     /**
@@ -119,6 +136,11 @@ public class CompanyServiceImpl implements CompanyService {
     public Page<CompanyDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Companies for query {}", query);
         Page<Company> result = companySearchRepository.search(queryStringQuery(query), pageable);
-        return result.map(companyMapper::toDto);
+        return result.map(v->{
+            CompanyDTO companyDTO= companyMapper.toDto(v);
+            userService.getUserWithAuthorities(companyDTO.getUserId())
+                .ifPresent(x-> companyDTO.setUserName(x.getLastName()+x.getFirstName()));
+            return companyDTO;
+        });
     }
 }

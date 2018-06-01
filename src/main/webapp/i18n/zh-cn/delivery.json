@@ -17,8 +17,8 @@
             "detail": {
                 "title": "投递信息"
             },
-            "userID": "用户ID",
-            "positionID": "职位ID",
+            "userID": "用户",
+            "positionID": "职位",
             "status": "状态",
             "timestamp": "时间"
         }

@@ -167,33 +167,33 @@ public class UserResource {
     }
 
     /**
-     * GET /users/:login : get the "login" user.
+     * GET /users/:id : get the "id" user.
      *
-     * @param login the login of the user to find
+     * @param id the login of the user to find
      * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
      */
-    @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
+    @GetMapping("/users/{id}")
     @Timed
-    public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
-        log.debug("REST request to get User : {}", login);
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
+        log.debug("REST request to get User : {}", id);
         return ResponseUtil.wrapOrNotFound(
-            userService.getUserWithAuthoritiesByLogin(login)
+            userService.getUserWithAuthoritiesById(id)
                 .map(UserDTO::new));
     }
 
     /**
      * DELETE /users/:login : delete the "login" User.
      *
-     * @param login the login of the user to delete
+     * @param id the login of the user to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
+    @DeleteMapping("/users/{id}")
     @Timed
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<Void> deleteUser(@PathVariable String login) {
-        log.debug("REST request to delete User: {}", login);
-        userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        log.debug("REST request to delete User: {}", id);
+        userService.deleteUser(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", id.toString())).build();
     }
 
     /**

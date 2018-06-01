@@ -15,7 +15,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                 <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="name"><span jhiTranslate="recruitApp.position.name">Name</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="describe"><span jhiTranslate="recruitApp.position.describe">Describe</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="place"><span jhiTranslate="recruitApp.position.place">Place</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="experience"><span jhiTranslate="recruitApp.position.experience">Experience</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="education"><span jhiTranslate="recruitApp.position.education">Education</span> <span class="fa fa-sort"></span></th>
@@ -29,7 +28,6 @@
             <tr *ngFor="let position of positions ;trackBy: trackId">
                 <td><a [routerLink]="['../position', position.id ]">{{position.id}}</a></td>
                 <td>{{position.name}}</td>
-                <td>{{position.describe}}</td>
                 <td>{{position.place}}</td>
                 <td>{{position.experience}}</td>
                 <td>{{position.education}}</td>

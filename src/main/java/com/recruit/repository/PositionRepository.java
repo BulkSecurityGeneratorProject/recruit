@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the Position entity.
@@ -16,5 +18,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
     Page<Position> findAllByCompany_UserId(Long userId,Pageable pageable);
+
+    List<Position> findAllByCompany_UserId(Long userId);
     Page<Position> findAllByType(PositionType type, Pageable pageable);
 }

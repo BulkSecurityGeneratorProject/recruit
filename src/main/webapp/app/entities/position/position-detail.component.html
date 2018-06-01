@@ -1,6 +1,6 @@
 
 <div *ngIf="position">
-    <h2><span jhiTranslate="recruitApp.position.detail.title">Position</span> {{position.id}}</h2>
+    <h2><span jhiTranslate="recruitApp.position.detail.title">Position</span> {{position.name}}</h2>
     <hr>
     <jhi-alert></jhi-alert>
     <jhi-alert-error></jhi-alert-error>
@@ -40,7 +40,7 @@
         <dt><span jhiTranslate="recruitApp.position.company">Company</span></dt>
         <dd>
             <div *ngIf="position.companyId">
-                <a [routerLink]="['/company', position.companyId]">{{position.companyId}}</a>
+                <a [routerLink]="['/company', position.companyId]">{{position.companyName}}</a>
             </div>
         </dd>
     </dl>
@@ -52,6 +52,7 @@
     </button>
 
     <button type="button"
+            *jhiHasAnyAuthority="'ROLE_USER'"
             [disabled]="isSaving||delivery.id!=undefined"
             (click)="deliveryPosition()"
             class="btn btn-primary">

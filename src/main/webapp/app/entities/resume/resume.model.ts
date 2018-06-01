@@ -18,6 +18,7 @@ export class Resume implements BaseEntity {
         public targetSalary?: string,
         public targetPosition?: string,
         public userId?: number,
+        public userName?: string,
         public enclosure?: string,
     ) {
     }

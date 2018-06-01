@@ -40,6 +40,16 @@ export class DeliveryService {
         return this.http.get<Delivery[]>(this.resourceUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<Delivery[]>) => this.convertArrayResponse(res));
     }
+    queryByCompany(req?: any): Observable<HttpResponse<Delivery[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Delivery[]>(`${this.resourceUrl}/company`, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Delivery[]>) => this.convertArrayResponse(res));
+    }
+    queryByUser(req?: any): Observable<HttpResponse<Delivery[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Delivery[]>(`${this.resourceUrl}/user`, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Delivery[]>) => this.convertArrayResponse(res));
+    }
     loadByPositionIdAndUserId(req?: any): Observable<EntityResponseType> {
         const options = createRequestOption(req);
         return this.http.get<Delivery>(`${this.resourceUrl}/position/user`, { params: options, observe: 'response' })
@@ -75,8 +85,6 @@ export class DeliveryService {
      */
     private convertItemFromServer(delivery: Delivery): Delivery {
         const copy: Delivery = Object.assign({}, delivery);
-        copy.timestamp = this.dateUtils
-            .convertDateTimeFromServer(delivery.timestamp);
         return copy;
     }
 
@@ -85,7 +93,6 @@ export class DeliveryService {
      */
     private convert(delivery: Delivery): Delivery {
         const copy: Delivery = Object.assign({}, delivery);
-
         copy.timestamp = this.dateUtils.toDate(delivery.timestamp);
         return copy;
     }

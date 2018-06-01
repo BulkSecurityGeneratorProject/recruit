@@ -1,6 +1,6 @@
 
 <div *ngIf="resume">
-    <h2><span jhiTranslate="recruitApp.resume.detail.title">Resume</span> {{resume.id}}</h2>
+    <h2><span jhiTranslate="recruitApp.resume.detail.title">Resume</span> {{resume.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
@@ -62,7 +62,7 @@
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.userId">User Id</span></dt>
         <dd>
-            <span>{{resume.userId}}</span>
+            <span><a [routerLink]="['../../user-management', resume.userId ]">{{resume.userName}}</a></span>
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.enclosure">Enclosure</span></dt>
         <dd>

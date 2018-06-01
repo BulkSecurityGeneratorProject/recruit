@@ -5,6 +5,7 @@ import com.recruit.service.dto.PositionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -62,4 +63,5 @@ public interface PositionService {
     Page<PositionDTO> search(String query, Pageable pageable);
 
     Page<PositionDTO> findAllByLogin(Pageable pageable);
+    List<Long> findAllIdsByLogin();
 }

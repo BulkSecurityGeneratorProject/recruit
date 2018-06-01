@@ -18,6 +18,7 @@ export class Company implements BaseEntity {
         public describe?: string,
         public address?: string,
         public userId?: number,
+        public userName?: string,
         public type?: CompanyType,
         public order?: number,
         public positions?: BaseEntity[],

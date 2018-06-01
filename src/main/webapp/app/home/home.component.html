@@ -1,10 +1,14 @@
 <div class="row">
     <div class="col-md-12">
         <form class="form-inline d-flex justify-content-center">
-            <input type="text" class="form-control form-control-lg w-60" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch"
+            <input type="text" class="form-control form-control-lg w-60" [(ngModel)]="currentSearch" id="currentSearch"
+                   name="currentSearch"
                    placeholder="{{'global.search' | translate}}">
-            <button class="btn btn-primary btn-lg" (click)="search(currentSearch)">{{'global.search' | translate}}</button>
-            <button class="btn btn-lg btn-danger" (click)="clear()" *ngIf="currentSearch">{{'global.clear' | translate}}</button>
+            <button class="btn btn-primary btn-lg" (click)="search(currentSearch)">{{'global.search' | translate}}
+            </button>
+            <button class="btn btn-lg btn-danger" (click)="clear()" *ngIf="currentSearch">{{'global.clear' |
+                translate}}
+            </button>
         </form>
     </div>
     <jhi-alert class="col-md-12"></jhi-alert>
@@ -13,25 +17,32 @@
     <div class="col-md-12 mt-2">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':type=='COMPUTER'}" href="javascript:;" (click)="navChange('COMPUTER')">{{'recruitApp.PositionType.COMPUTER' | translate}}</a>
+                <a class="nav-link" [ngClass]="{'active':type=='COMPUTER'}" href="javascript:;"
+                   (click)="navChange('COMPUTER')">{{'recruitApp.PositionType.COMPUTER' | translate}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':type=='INTERNET'}" href="javascript:;" (click)="navChange('INTERNET')">{{'recruitApp.PositionType.INTERNET' | translate}}</a>
+                <a class="nav-link" [ngClass]="{'active':type=='INTERNET'}" href="javascript:;"
+                   (click)="navChange('INTERNET')">{{'recruitApp.PositionType.INTERNET' | translate}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':type=='MEDICAL'}" href="javascript:;" (click)="navChange('MEDICAL')">{{'recruitApp.PositionType.MEDICAL' | translate}}</a>
+                <a class="nav-link" [ngClass]="{'active':type=='MEDICAL'}" href="javascript:;"
+                   (click)="navChange('MEDICAL')">{{'recruitApp.PositionType.MEDICAL' | translate}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':type=='REALTY'}" href="javascript:;" (click)="navChange('REALTY')">{{'recruitApp.PositionType.REALTY' | translate}}</a>
+                <a class="nav-link" [ngClass]="{'active':type=='REALTY'}" href="javascript:;"
+                   (click)="navChange('REALTY')">{{'recruitApp.PositionType.REALTY' | translate}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':type=='AD'}" href="javascript:;" (click)="navChange('AD')">{{'recruitApp.PositionType.AD' | translate}}</a>
+                <a class="nav-link" [ngClass]="{'active':type=='AD'}" href="javascript:;" (click)="navChange('AD')">{{'recruitApp.PositionType.AD'
+                    | translate}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':type=='OTHER'}" href="javascript:;" (click)="navChange('OTHER')">{{'recruitApp.PositionType.OTHER' | translate}}</a>
+                <a class="nav-link" [ngClass]="{'active':type=='OTHER'}" href="javascript:;"
+                   (click)="navChange('OTHER')">{{'recruitApp.PositionType.OTHER' | translate}}</a>
             </li>
             <li class="nav-item" *ngIf="currentSearch">
-                <a class="nav-link" [ngClass]="{'active':type=='SEARCH'}" href="javascript:;" (click)="navChange('SEARCH')">{{'global.search' | translate}}</a>
+                <a class="nav-link" [ngClass]="{'active':type=='SEARCH'}" href="javascript:;"
+                   (click)="navChange('SEARCH')">{{'global.search' | translate}}</a>
             </li>
         </ul>
     </div>
@@ -40,10 +51,12 @@
         <div class="card mt-2" *ngFor="let pos of positions" style="width: 19%; margin-left: 0.5%;margin-right: 0.5%">
             <div class="card-body">
                 <h5 class="card-title">{{pos.name}}</h5>
-                <p class="card-text" [innerHTML]="pos.describe">{{pos.describe}}</p>
+                <p class="card-text">{{pos.salary}}</p>
             </div>
             <div class="card-footer">
-                <small class="text-muted">{{'recruitApp.PositionType.' + pos.type| translate}}</small>
+                <small class="text-muted">
+                    <a [routerLink]="['company', pos.companyId ]">{{pos.companyName}}</a>
+                </small>
                 <small class="text-muted float-right">
                     <a [routerLink]="['position', pos.id ]">{{'global.more' | translate}}</a>
                 </small>
@@ -56,12 +69,14 @@
         <h2>{{'global.auth' | translate}}</h2>
     </div>
 
-    <div *ngIf="positions && positions.length"  class="col-md-12 mt-2">
+    <div *ngIf="positions && positions.length" class="col-md-12 mt-2">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

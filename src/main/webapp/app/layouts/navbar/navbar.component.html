@@ -34,11 +34,27 @@
                     </span>
                 </a>
             </li>
+            <li *jhiHasAnyAuthority="'ROLE_COMPANY'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="delivery-company" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-coffee" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.entities.delivery">Delivery</span>
+                    </span>
+                </a>
+            </li>
             <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="resume-user" (click)="collapseNavbar()">
                     <span>
                         <i class="fa fa-address-book" aria-hidden="true"></i>
                         <span jhiTranslate="global.menu.entities.resume">Resume</span>
+                    </span>
+                </a>
+            </li>
+            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="delivery-user" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-address-book" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.entities.delivery">Delivery</span>
                     </span>
                 </a>
             </li>

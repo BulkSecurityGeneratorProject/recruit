@@ -41,6 +41,7 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
     private String targetPosition;
 
     private Long userId;
+    private String userName;
 
     private String enclosure;
 
@@ -180,6 +181,14 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
         this.enclosure = enclosure;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -220,6 +229,7 @@ public class ResumeDTO extends AbstractAuditingDTO implements Serializable {
             ", targetSalary='" + getTargetSalary() + "'" +
             ", targetPosition='" + getTargetPosition() + "'" +
             ", userId=" + getUserId() +
+            ", userName=" + getUserName() +
             ", enclosure='" + getEnclosure() + "'" +
             "}";
     }

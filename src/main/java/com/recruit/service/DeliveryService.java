@@ -51,4 +51,8 @@ public interface DeliveryService {
     Page<DeliveryDTO> search(String query, Pageable pageable);
 
     DeliveryDTO findOneByPositionIdAndUserId(Long posId, Long userId);
+
+    Page<DeliveryDTO> findAllByUserCompany(Pageable pageable);
+
+    Page<DeliveryDTO> findAllByUser(Pageable pageable);
 }

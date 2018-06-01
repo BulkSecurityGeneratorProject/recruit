@@ -1,18 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../shared';
-import { PositionComponent } from './position.component';
-import { PositionDetailComponent } from './position-detail.component';
-import { PositionPopupComponent } from './position-dialog.component';
-import { PositionDeletePopupComponent } from './position-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {PositionComponent} from './position.component';
+import {PositionDetailComponent} from './position-detail.component';
+import {PositionPopupComponent} from './position-dialog.component';
+import {PositionDeletePopupComponent} from './position-delete-dialog.component';
 import {PositionCompanyComponent} from './position-company.component';
 
 @Injectable()
 export class PositionResolvePagingParams implements Resolve<any> {
 
-    constructor(private paginationUtil: JhiPaginationUtil) {}
+    constructor(private paginationUtil: JhiPaginationUtil) {
+    }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
@@ -21,7 +22,7 @@ export class PositionResolvePagingParams implements Resolve<any> {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort)
-      };
+        };
     }
 }
 
@@ -52,7 +53,7 @@ export const positionRoute: Routes = [
         path: 'position/:id',
         component: PositionDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_COMPANY'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService]

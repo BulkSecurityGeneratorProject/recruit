@@ -15,6 +15,8 @@ import {
     deliveryPopupRoute,
     DeliveryResolvePagingParams,
 } from './';
+import {DeliveryCompanyComponent} from './delivery-company.component';
+import {DeliveryUserComponent} from './delivery-user.component';
 
 const ENTITY_STATES = [
     ...deliveryRoute,
@@ -33,6 +35,8 @@ const ENTITY_STATES = [
         DeliveryDeleteDialogComponent,
         DeliveryPopupComponent,
         DeliveryDeletePopupComponent,
+        DeliveryCompanyComponent,
+        DeliveryUserComponent
     ],
     entryComponents: [
         DeliveryComponent,

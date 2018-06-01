@@ -15,8 +15,12 @@ public class DeliveryDTO implements Serializable {
     private Long id;
 
     private Long userID;
+    private String userName;
 
     private Long positionID;
+    private String positionName;
+
+    private Long resumeID;
 
     private DeliveryType status;
 
@@ -62,6 +66,30 @@ public class DeliveryDTO implements Serializable {
         this.timestamp = timestamp;
     }
 
+    public Long getResumeID() {
+        return resumeID;
+    }
+
+    public void setResumeID(Long resumeID) {
+        this.resumeID = resumeID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -89,6 +117,8 @@ public class DeliveryDTO implements Serializable {
             "id=" + getId() +
             ", userID=" + getUserID() +
             ", positionID=" + getPositionID() +
+            ", positionName=" + getPositionName() +
+            ", userName=" + getUserName() +
             ", status='" + getStatus() + "'" +
             ", timestamp='" + getTimestamp() + "'" +
             "}";

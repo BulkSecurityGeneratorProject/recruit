@@ -1,6 +1,6 @@
 
 <div *ngIf="company">
-    <h2><span jhiTranslate="recruitApp.company.detail.title">Company</span> {{company.id}}</h2>
+    <h2><span jhiTranslate="recruitApp.company.detail.title">Company</span> {{company.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
@@ -26,7 +26,7 @@
         </dd>
         <dt><span jhiTranslate="recruitApp.company.userId">User Id</span></dt>
         <dd>
-            <span>{{company.userId}}</span>
+            <span><a [routerLink]="['../../user-management', company.userId ]">{{company.userName}}</a></span>
         </dd>
         <dt><span jhiTranslate="recruitApp.company.type">Type</span></dt>
         <dd>

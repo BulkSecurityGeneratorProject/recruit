@@ -51,7 +51,9 @@
         <div class="card mt-2" *ngFor="let pos of positions" style="width: 19%; margin-left: 0.5%;margin-right: 0.5%">
             <div class="card-body">
                 <h5 class="card-title">{{pos.name}}</h5>
-                <p class="card-text">{{pos.salary}}</p>
+                <p class="card-text"><span jhiTranslate="recruitApp.position.salary">Salary</span>：{{pos.salary}}</p>
+                <p class="card-text"><span jhiTranslate="recruitApp.position.experience">Experience</span>：{{pos.experience}}</p>
+                <p class="card-text"><span jhiTranslate="recruitApp.position.place">Place</span>：{{pos.place}}</p>
             </div>
             <div class="card-footer">
                 <small class="text-muted">

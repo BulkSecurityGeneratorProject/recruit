@@ -97,7 +97,8 @@ export class HomeComponent implements OnInit {
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
-            console.log(this.previousPage);
+            this.page = page;
+            this.loadPositionByType();
         }
     }
 

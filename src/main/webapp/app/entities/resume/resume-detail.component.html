@@ -30,7 +30,7 @@
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.advantage">Advantage</span></dt>
         <dd>
-            <span>{{resume.advantage}}</span>
+            <span [innerHTML]="resume.advantage">{{resume.advantage}}</span>
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.targetPlace">Target Place</span></dt>
         <dd>
@@ -46,7 +46,7 @@
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.undergo">Undergo</span></dt>
         <dd>
-            <span>{{resume.undergo}}</span>
+            <span [innerHTML]="resume.undergo">{{resume.undergo}}</span>
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.education">Education</span></dt>
         <dd>
@@ -66,7 +66,9 @@
         </dd>
         <dt><span jhiTranslate="recruitApp.resume.enclosure">Enclosure</span></dt>
         <dd>
-            <span>{{resume.enclosure}}</span>
+            <span>
+               <a href="http://p7pxq46q2.bkt.clouddn.com/{{resume.enclosure}}" *ngIf="resume.enclosure" target="_blank">{{resume.enclosure}}</a>
+            </span>
         </dd>
     </dl>
 

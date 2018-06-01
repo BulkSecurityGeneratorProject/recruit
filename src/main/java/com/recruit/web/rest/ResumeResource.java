@@ -1,11 +1,20 @@
 package com.recruit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.gson.Gson;
+import com.qiniu.common.QiniuException;
+import com.qiniu.common.Zone;
+import com.qiniu.http.Response;
+import com.qiniu.storage.Configuration;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.storage.model.DefaultPutRet;
+import com.qiniu.util.Auth;
+import com.recruit.config.Constants;
 import com.recruit.service.ResumeService;
+import com.recruit.service.dto.ResumeDTO;
 import com.recruit.web.rest.errors.BadRequestAlertException;
 import com.recruit.web.rest.util.HeaderUtil;
 import com.recruit.web.rest.util.PaginationUtil;
-import com.recruit.service.dto.ResumeDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,15 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Resume.
@@ -169,22 +175,34 @@ public class ResumeResource {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "upload_empty", "file is empty")).build();
         }
-        int index=file.getOriginalFilename().lastIndexOf(".");
-        String name = UUID.randomUUID().toString() + file.getOriginalFilename().substring(index,file.getOriginalFilename().length());
-        log.debug("file name is {}",name);
-        String currentDir = new File(".").getAbsolutePath();
-        String filePath = currentDir + "/target/www/upload/";
-        log.debug("filePath is {}",filePath);
-        File mkdirFile = new File(filePath);
-        boolean mkdir = true;
-        if (!mkdirFile.exists()) {
-            mkdir = mkdirFile.mkdir();
-        }
-        if (mkdir) {
-            File outFile = new File(filePath, name);
-            file.transferTo(outFile);
+        int index = file.getOriginalFilename().lastIndexOf(".");
+        String name = UUID.randomUUID().toString() + file.getOriginalFilename().substring(index, file.getOriginalFilename().length());
+
+        //构造一个带指定Zone对象的配置类
+        Configuration cfg = new Configuration(Zone.zone1());
+        //...其他参数参考类注释
+        UploadManager uploadManager = new UploadManager(cfg);
+        Auth auth = Auth.create(Constants.QINIU_ACCESS_KEY, Constants.QINIU_SECRET_KEY);
+        String upToken = auth.uploadToken(Constants.QINIU_BUCKET);
+        try {
+            Response response = uploadManager.put(file.getInputStream(), name, upToken, null, null);
+            //解析上传成功的结果
+            DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+            log.debug("qiniu response {}",putRet.key);
+            log.debug("qiniu response {}",putRet.hash);
+            return ResponseEntity.noContent()
+                .headers(HeaderUtil.createAlert("error.upload_success", putRet.key)).build();
+        } catch (QiniuException ex) {
+            Response r = ex.response;
+            log.error(r.toString());
+            try {
+                log.error(r.bodyString());
+            } catch (QiniuException ex2) {
+                //ignore
+            }
         }
         return ResponseEntity.noContent()
-            .headers(HeaderUtil.createAlert(  "error.upload_success", name)).build();
+            .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "upload_error","")).build();
     }
+
 }

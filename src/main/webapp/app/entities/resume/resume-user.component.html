@@ -84,6 +84,7 @@
             <div class="progress mt-2" *ngIf="uploading">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
             </div>
+            <a href="http://p7pxq46q2.bkt.clouddn.com/{{resume.enclosure}}" *ngIf="resume.enclosure" target="_blank">{{resume.enclosure}}</a>
         </div>
         <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
             <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>

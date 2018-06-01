@@ -32,18 +32,13 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="recruitApp.resume.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="sex"><span jhiTranslate="recruitApp.resume.sex">Sex</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="birth"><span jhiTranslate="recruitApp.resume.birth">Birth</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="email"><span jhiTranslate="recruitApp.resume.email">Email</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="wechat"><span jhiTranslate="recruitApp.resume.wechat">Wechat</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="state"><span jhiTranslate="recruitApp.resume.state">State</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="targetPlace"><span jhiTranslate="recruitApp.resume.targetPlace">Target Place</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="workTime"><span jhiTranslate="recruitApp.resume.workTime">Work Time</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="experience"><span jhiTranslate="recruitApp.resume.experience">Experience</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="education"><span jhiTranslate="recruitApp.resume.education">Education</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="targetSalary"><span jhiTranslate="recruitApp.resume.targetSalary">Target Salary</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="targetPosition"><span jhiTranslate="recruitApp.resume.targetPosition">Target Position</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="userId"><span jhiTranslate="recruitApp.resume.userId">User Id</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="enclosure"><span jhiTranslate="recruitApp.resume.enclosure">Enclosure</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -52,19 +47,14 @@
                 <td><a [routerLink]="['../resume', resume.id ]">{{resume.id}}</a></td>
                 <td>{{resume.name}}</td>
                 <td>{{resume.sex}}</td>
-                <td>{{resume.birth | date:'medium'}}</td>
-                <td>{{resume.email}}</td>
                 <td>{{resume.wechat}}</td>
                 <td>{{resume.state}}</td>
-                <td>{{resume.targetPlace}}</td>
-                <td>{{resume.workTime | date:'medium'}}</td>
-                <td>{{resume.experience}}</td>
+               <td>{{resume.experience}}</td>
                 <td>{{resume.education}}</td>
                 <td>{{resume.targetSalary}}</td>
                 <td>{{resume.targetPosition}}</td>
                 <td><a [routerLink]="['../user-management', resume.userId ]">{{resume.userName}}</a></td>
-                <td>{{resume.enclosure}}</td>
-                <td class="text-right">
+               <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../resume', resume.id ]"

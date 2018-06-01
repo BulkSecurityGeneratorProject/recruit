@@ -135,6 +135,8 @@
     "error": {
         "internalServerError": "Internal server error",
         "server.not.reachable": "服务器无法访问",
+        "upload_empty": "上传不能为空",
+        "upload_success": "上传成功",
         "url.not.found": "Not found",
         "NotNull": "域 {{fieldName}} 不能为空!",
         "Size": "域 {{fieldName}} 不满足最大/最小值限制!",

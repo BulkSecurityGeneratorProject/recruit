@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Resume } from './resume.model';
-import { ResumePopupService } from './resume-popup.service';
-import { ResumeService } from './resume.service';
+import {Resume} from './resume.model';
+import {ResumePopupService} from './resume-popup.service';
+import {ResumeService} from './resume.service';
 
 @Component({
     selector: 'jhi-resume-dialog',
@@ -18,6 +18,7 @@ export class ResumeDialogComponent implements OnInit {
 
     resume: Resume;
     isSaving: boolean;
+    uploading = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -51,13 +52,27 @@ export class ResumeDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: Resume) {
-        this.eventManager.broadcast({ name: 'resumeListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'resumeListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    upload($event) {
+        if ($event && $event.target.files && $event.target.files[0]) {
+            const file = $event.target.files[0];
+            this.uploading = true;
+            this.resumeService.upload(file).subscribe((res) => {
+                this.resume.enclosure = res.headers.get('X-recruitApp-params');
+                this.uploading = false;
+            }, ((error) => {
+                console.log(error);
+                this.uploading = false;
+            }));
+        }
     }
 }
 
@@ -72,11 +87,12 @@ export class ResumePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private resumePopupService: ResumePopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.resumePopupService
                     .open(ResumeDialogComponent as Component, params['id']);
             } else {

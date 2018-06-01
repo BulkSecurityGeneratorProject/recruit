@@ -33,7 +33,8 @@
             "targetSalary": "目标薪资",
             "targetPosition": "目标岗位",
             "userId": "关联注册用户",
-            "enclosure": "附件简历"
+            "enclosure": "附件简历",
+            "enclosure_down": "已上传"
         }
     }
 }

@@ -15,12 +15,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -112,6 +116,7 @@ public class ResumeResource {
         ResumeDTO resumeDTO = resumeService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(resumeDTO));
     }
+
     /**
      * GET  /resumes/user/:id : get the "userId" resume.
      *
@@ -144,7 +149,7 @@ public class ResumeResource {
      * SEARCH  /_search/resumes?query=:query : search for the resume corresponding
      * to the query.
      *
-     * @param query the query of the resume search
+     * @param query    the query of the resume search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -157,4 +162,29 @@ public class ResumeResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @PostMapping("/resumes/upload")
+    @Timed
+    public ResponseEntity<Void> singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "upload_empty", "file is empty")).build();
+        }
+        int index=file.getOriginalFilename().lastIndexOf(".");
+        String name = UUID.randomUUID().toString() + file.getOriginalFilename().substring(index,file.getOriginalFilename().length());
+        log.debug("file name is {}",name);
+        String currentDir = new File(".").getAbsolutePath();
+        String filePath = currentDir + "/target/www/upload/";
+        log.debug("filePath is {}",filePath);
+        File mkdirFile = new File(filePath);
+        boolean mkdir = true;
+        if (!mkdirFile.exists()) {
+            mkdir = mkdirFile.mkdir();
+        }
+        if (mkdir) {
+            File outFile = new File(filePath, name);
+            file.transferTo(outFile);
+        }
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createAlert(  "error.upload_success", name)).build();
+    }
 }

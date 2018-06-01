@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ResumeService} from './resume.service';
 import {Resume} from './resume.model';
@@ -6,13 +6,14 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Principal} from '../../shared';
 
 @Component({
-  selector: 'jhi-resume-user',
-  templateUrl: './resume-user.component.html',
-  styles: []
+    selector: 'jhi-resume-user',
+    templateUrl: './resume-user.component.html',
+    styles: []
 })
 export class ResumeUserComponent implements OnInit {
     resume: Resume = new Resume();
     isSaving: boolean;
+    uploading = false;
 
     constructor(
         private resumeService: ResumeService,
@@ -54,4 +55,17 @@ export class ResumeUserComponent implements OnInit {
         this.isSaving = false;
     }
 
+    upload($event) {
+        if ($event && $event.target.files && $event.target.files[0]) {
+            const file = $event.target.files[0];
+            this.uploading = true;
+            this.resumeService.upload(file).subscribe((res) => {
+                this.resume.enclosure = res.headers.get('X-recruitApp-params');
+                this.uploading = false;
+            }, ((error) => {
+                console.log(error);
+                this.uploading = false;
+            }));
+        }
+    }
 }

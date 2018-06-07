@@ -53,7 +53,7 @@ export const positionRoute: Routes = [
         path: 'position/:id',
         component: PositionDetailComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_COMPANY'],
+            authorities: ['ROLE_USER', 'ROLE_COMPANY', 'ROLE_ADMIN'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -65,7 +65,7 @@ export const positionPopupRoute: Routes = [
         path: 'position-new',
         component: PositionPopupComponent,
         data: {
-            authorities: ['ROLE_COMPANY'],
+            authorities: ['ROLE_COMPANY', 'ROLE_ADMIN'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -75,7 +75,7 @@ export const positionPopupRoute: Routes = [
         path: 'position/:id/edit',
         component: PositionPopupComponent,
         data: {
-            authorities: ['ROLE_COMPANY'],
+            authorities: ['ROLE_COMPANY', 'ROLE_ADMIN'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -85,7 +85,7 @@ export const positionPopupRoute: Routes = [
         path: 'position/:id/delete',
         component: PositionDeletePopupComponent,
         data: {
-            authorities: ['ROLE_COMPANY'],
+            authorities: ['ROLE_COMPANY', 'ROLE_ADMIN'],
             pageTitle: 'recruitApp.position.home.title'
         },
         canActivate: [UserRouteAccessService],

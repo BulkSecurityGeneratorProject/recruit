@@ -34,7 +34,7 @@ export const resumeRoute: Routes = [
             'pagingParams': ResumeResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'recruitApp.resume.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -42,7 +42,7 @@ export const resumeRoute: Routes = [
         path: 'resume/:id',
         component: ResumeDetailComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_COMPANY'],
+            authorities: ['ROLE_USER', 'ROLE_COMPANY', 'ROLE_ADMIN'],
             pageTitle: 'recruitApp.resume.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const resumePopupRoute: Routes = [
         path: 'resume-new',
         component: ResumePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'recruitApp.resume.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -72,7 +72,7 @@ export const resumePopupRoute: Routes = [
         path: 'resume/:id/edit',
         component: ResumePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'recruitApp.resume.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -82,7 +82,7 @@ export const resumePopupRoute: Routes = [
         path: 'resume/:id/delete',
         component: ResumeDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'recruitApp.resume.home.title'
         },
         canActivate: [UserRouteAccessService],

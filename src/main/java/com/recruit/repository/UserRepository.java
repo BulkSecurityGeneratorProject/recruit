@@ -1,5 +1,6 @@
 package com.recruit.repository;
 
+import com.recruit.domain.Authority;
 import com.recruit.domain.User;
 
 import org.springframework.cache.annotation.Cacheable;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.time.Instant;
+import java.util.Set;
 
 /**
  * Spring Data JPA repository for the User entity.
@@ -44,4 +46,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmail(String email);
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
+    Page<User> findAllByAuthoritiesIsAndLoginNot(Set<Authority> authorities, Pageable pageable, String login);
 }

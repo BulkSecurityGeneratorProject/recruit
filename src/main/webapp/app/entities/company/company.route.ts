@@ -42,7 +42,7 @@ export const companyRoute: Routes = [
         path: 'company/:id',
         component: CompanyDetailComponent,
         data: {
-            authorities: ['ROLE_COMPANY', 'ROLE_USER'],
+            authorities: ['ROLE_COMPANY', 'ROLE_USER', 'ROLE_ADMIN'],
             pageTitle: 'recruitApp.company.home.title'
         },
         canActivate: [UserRouteAccessService]

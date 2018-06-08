@@ -108,6 +108,18 @@ public class DeliveryServiceImpl implements DeliveryService {
         deliveryRepository.delete(id);
         deliverySearchRepository.delete(id);
     }
+    @Override
+    public void deleteByPositionID(Long id) {
+        log.debug("Request to delete Delivery : {}", id);
+        deliveryRepository.deleteByPositionID(id);
+        deliverySearchRepository.deleteByPositionID(id);
+    }
+    @Override
+    public void deleteByUserID(Long id) {
+        log.debug("Request to delete Delivery : {}", id);
+        deliveryRepository.deleteByUserID(id);
+        deliverySearchRepository.deleteByUserID(id);
+    }
 
     /**
      * Search for the delivery corresponding to the query.
@@ -158,7 +170,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
         DeliveryDTO deliveryDTO = deliveryMapper.toDto(delivery);
         userService.getUserWithAuthorities(deliveryDTO.getUserID()).ifPresent(user -> {
-            deliveryDTO.setUserName(user.getLastName() + user.getFirstName());
+            deliveryDTO.setUserName(user.getLogin());
             ResumeDTO resumeDTO = resumeService.findByUserId(user.getId());
             if (resumeDTO != null) {
                 deliveryDTO.setResumeID(resumeDTO.getId());

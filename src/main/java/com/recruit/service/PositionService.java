@@ -51,7 +51,8 @@ public interface PositionService {
      * @param id the id of the entity
      */
     void delete(Long id);
-
+    void deleteByCompanyUserId(Long id);
+    void deleteByCompanyId(Long id);
     /**
      * Search for the position corresponding to the query.
      *

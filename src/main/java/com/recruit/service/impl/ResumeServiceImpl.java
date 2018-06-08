@@ -73,7 +73,7 @@ public class ResumeServiceImpl implements ResumeService {
             .map(v->{
                 ResumeDTO resumeDTO=resumeMapper.toDto(v);
                 userService.getUserWithAuthorities(resumeDTO.getUserId())
-                    .ifPresent(x-> resumeDTO.setUserName(x.getLastName()+x.getFirstName()));
+                    .ifPresent(x-> resumeDTO.setUserName(x.getLogin()));
                 return resumeDTO;
             });
     }
@@ -90,7 +90,7 @@ public class ResumeServiceImpl implements ResumeService {
         log.debug("Request to get Resume : {}", id);
         Resume resume = resumeRepository.findOne(id);
         ResumeDTO resumeDTO= resumeMapper.toDto(resume);
-        userService.getUserWithAuthorities(resumeDTO.getUserId()).ifPresent(v-> resumeDTO.setUserName(v.getLastName()+v.getFirstName()));
+        userService.getUserWithAuthorities(resumeDTO.getUserId()).ifPresent(v-> resumeDTO.setUserName(v.getLogin()));
         return resumeDTO;
     }
 
@@ -107,7 +107,7 @@ public class ResumeServiceImpl implements ResumeService {
         Resume resume = resumeRepository.findOneByUserId(id);
         ResumeDTO resumeDTO= resumeMapper.toDto(resume);
         userService.getUserWithAuthorities(resumeDTO.getUserId())
-            .ifPresent(v-> resumeDTO.setUserName(v.getLastName()+v.getFirstName()));
+            .ifPresent(v-> resumeDTO.setUserName(v.getLogin()));
         return resumeDTO;
     }
 
@@ -122,6 +122,12 @@ public class ResumeServiceImpl implements ResumeService {
         log.debug("Request to delete Resume : {}", id);
         resumeRepository.delete(id);
         resumeSearchRepository.delete(id);
+    }
+    @Override
+    public void deleteByUserId(Long id) {
+        log.debug("Request to delete Resume : {}", id);
+        resumeRepository.deleteByUserId(id);
+        resumeSearchRepository.deleteByUserId(id);
     }
 
     /**
@@ -139,7 +145,7 @@ public class ResumeServiceImpl implements ResumeService {
         return result .map(v->{
             ResumeDTO resumeDTO=resumeMapper.toDto(v);
             userService.getUserWithAuthorities(resumeDTO.getUserId())
-                .ifPresent(x-> resumeDTO.setUserName(x.getLastName()+x.getFirstName()));
+                .ifPresent(x-> resumeDTO.setUserName(x.getLogin()));
             return resumeDTO;
         });
     }

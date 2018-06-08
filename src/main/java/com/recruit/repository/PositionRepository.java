@@ -17,8 +17,14 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
-    Page<Position> findAllByCompany_UserId(Long userId,Pageable pageable);
+    Page<Position> findAllByCompany_UserId(Long userId, Pageable pageable);
 
     List<Position> findAllByCompany_UserId(Long userId);
+    List<Position> findAllByCompanyId(Long id);
+
     Page<Position> findAllByType(PositionType type, Pageable pageable);
+
+    void deleteByCompany_UserId(Long userId);
+
+    void deleteByCompanyId(Long id);
 }

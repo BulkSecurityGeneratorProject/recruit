@@ -20,4 +20,8 @@ public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 
     Page<Delivery> findAllByPositionIDIn(List<Long> positionID, Pageable pageable);
     Page<Delivery> findAllByUserID(Long userId, Pageable pageable);
+
+
+    void deleteByPositionID(Long id);
+    void deleteByUserID(Long id);
 }

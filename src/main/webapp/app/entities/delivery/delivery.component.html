@@ -1,12 +1,6 @@
 <div>
     <h2>
         <span jhiTranslate="recruitApp.delivery.home.title">Deliveries</span>
-        <button class="btn btn-primary float-right jh-create-entity create-delivery" [routerLink]="['/', { outlets: { popup: ['delivery-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down"  jhiTranslate="recruitApp.delivery.home.createLabel">
-            Create new Delivery
-            </span>
-        </button>
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -51,14 +45,6 @@
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'delivery/'+ delivery.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'delivery/'+ delivery.id + '/delete'} }]"

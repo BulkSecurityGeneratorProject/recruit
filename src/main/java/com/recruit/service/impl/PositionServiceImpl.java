@@ -3,6 +3,7 @@ package com.recruit.service.impl;
 import com.recruit.domain.User;
 import com.recruit.domain.enumeration.PositionType;
 import com.recruit.service.CompanyService;
+import com.recruit.service.DeliveryService;
 import com.recruit.service.PositionService;
 import com.recruit.domain.Position;
 import com.recruit.repository.PositionRepository;
@@ -53,6 +54,9 @@ public class PositionServiceImpl implements PositionService {
 
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private DeliveryService deliveryService;
 
     /**
      * Save a position.
@@ -153,8 +157,25 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Position : {}", id);
+        deliveryService.deleteByPositionID(id);
         positionRepository.delete(id);
         positionSearchRepository.delete(id);
+    }
+
+    @Override
+    public void deleteByCompanyUserId(Long id) {
+        log.debug("Request to delete Position : {}", id);
+        deliveryService.deleteByUserID(id);
+        positionRepository.deleteByCompany_UserId(id);
+        positionSearchRepository.deleteByCompany_UserId(id);
+    }
+
+    @Override
+    public void deleteByCompanyId(Long id) {
+        log.debug("Request to delete Position : {}", id);
+        positionRepository.findAllByCompanyId(id).forEach(position -> deliveryService.deleteByPositionID(position.getId()));
+        positionRepository.deleteByCompanyId(id);
+        positionSearchRepository.deleteByCompanyId(id);
     }
 
     /**

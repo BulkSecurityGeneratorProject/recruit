@@ -61,6 +61,10 @@ public class UserService {
     private ResumeService resumeService;
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private DeliveryService deliveryService;
+
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository.findOneByActivationKey(key)
@@ -77,18 +81,18 @@ public class UserService {
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
-       log.debug("Reset user password for reset key {}", key);
+        log.debug("Reset user password for reset key {}", key);
 
-       return userRepository.findOneByResetKey(key)
-           .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
-           .map(user -> {
+        return userRepository.findOneByResetKey(key)
+            .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
+            .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
                 user.setResetDate(null);
                 cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
                 cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(user.getEmail());
                 return user;
-           });
+            });
     }
 
     public Optional<User> requestPasswordReset(String mail) {
@@ -103,10 +107,10 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password,Boolean company) {
+    public User registerUser(UserDTO userDTO, String password, Boolean company) {
 
         User newUser = new User();
-        Authority authority = authorityRepository.findOne(company?AuthoritiesConstants.COMPANY:AuthoritiesConstants.USER);
+        Authority authority = authorityRepository.findOne(company ? AuthoritiesConstants.COMPANY : AuthoritiesConstants.USER);
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin());
@@ -123,14 +127,14 @@ public class UserService {
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
-        newUser=userRepository.save(newUser);
-        if(company){
+        newUser = userRepository.save(newUser);
+        if (company) {
             //新建企业信息
             CompanyDTO companyDTO = new CompanyDTO();
             companyDTO.setUserId(newUser.getId());
             companyDTO.setType(CompanyType.OTHER);
             companyService.save(companyDTO);
-        }else{
+        } else {
             //生成一份个人简历
             ResumeDTO resumeDTO = new ResumeDTO();
             resumeDTO.setUserId(newUser.getId());
@@ -167,14 +171,14 @@ public class UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
-        user= userRepository.save(user);
-        if(userDTO.getAuthorities().contains(AuthoritiesConstants.COMPANY)){
+        user = userRepository.save(user);
+        if (userDTO.getAuthorities().contains(AuthoritiesConstants.COMPANY)) {
             //新建企业信息
             CompanyDTO companyDTO = new CompanyDTO();
             companyDTO.setUserId(user.getId());
             companyDTO.setType(CompanyType.OTHER);
             companyService.save(companyDTO);
-        }else{
+        } else {
             //生成一份个人简历
             ResumeDTO resumeDTO = new ResumeDTO();
             resumeDTO.setUserId(user.getId());
@@ -192,10 +196,10 @@ public class UserService {
      * Update basic information (first name, last name, email, language) for the current user.
      *
      * @param firstName first name of user
-     * @param lastName last name of user
-     * @param email email id of user
-     * @param langKey language key
-     * @param imageUrl image URL of user
+     * @param lastName  last name of user
+     * @param email     email id of user
+     * @param langKey   language key
+     * @param imageUrl  image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         SecurityUtils.getCurrentUserLogin()
@@ -246,6 +250,14 @@ public class UserService {
 
     public void deleteUser(Long id) {
         userRepository.findOneWithAuthoritiesById(id).ifPresent(user -> {
+            resumeService.deleteByUserId(user.getId());
+            if (user.getAuthorities().contains("ROLE_COMPANY")) {
+                companyService.deleteByUserId(user.getId());
+            }
+            if (user.getAuthorities().contains("ROLE_USER")) {
+                resumeService.deleteByUserId(user.getId());
+                deliveryService.deleteByUserID(user.getId());
+            }
             userRepository.delete(user);
             userSearchRepository.delete(user);
             cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
@@ -269,8 +281,8 @@ public class UserService {
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         Set<Authority> authorities = new HashSet<>();
-        authorities.add(new Authority("ROLE_USER"));
-        return userRepository.findAllByAuthoritiesIsAndLoginNot(authorities,pageable,Constants.SYSTEM_ACCOUNT)
+        authorities.add(new Authority("ROLE_ADMIN"));
+        return userRepository.findAllByAuthoritiesNotAndLoginNot(authorities, pageable, Constants.SYSTEM_ACCOUNT)
             .map(UserDTO::new);
     }
 
@@ -278,6 +290,7 @@ public class UserService {
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);
     }
+
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesById(Long id) {
         return userRepository.findOneWithAuthoritiesById(id);

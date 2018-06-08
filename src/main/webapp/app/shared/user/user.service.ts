@@ -29,8 +29,8 @@ export class UserService {
         return this.http.get<User[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
 
-    delete(login: string): Observable<HttpResponse<any>> {
-        return this.http.delete(`${this.resourceUrl}/${login}`, { observe: 'response' });
+    delete(id: number): Observable<HttpResponse<any>> {
+        return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
     authorities(): Observable<string[]> {

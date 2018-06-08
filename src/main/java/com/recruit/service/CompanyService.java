@@ -39,6 +39,7 @@ public interface CompanyService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    void deleteByUserId(Long id);
 
     /**
      * Search for the company corresponding to the query.

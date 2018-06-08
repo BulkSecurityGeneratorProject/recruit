@@ -2,8 +2,10 @@ package com.recruit.service.impl;
 
 import com.recruit.domain.Company;
 import com.recruit.repository.CompanyRepository;
+import com.recruit.repository.PositionRepository;
 import com.recruit.repository.search.CompanySearchRepository;
 import com.recruit.service.CompanyService;
+import com.recruit.service.PositionService;
 import com.recruit.service.UserService;
 import com.recruit.service.dto.CompanyDTO;
 import com.recruit.service.mapper.CompanyMapper;
@@ -40,6 +42,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PositionService positionService;
 
     /**
      * Save a company.
@@ -68,10 +72,10 @@ public class CompanyServiceImpl implements CompanyService {
     public Page<CompanyDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Companies");
         return companyRepository.findAll(pageable)
-            .map(v->{
-                CompanyDTO companyDTO= companyMapper.toDto(v);
+            .map(v -> {
+                CompanyDTO companyDTO = companyMapper.toDto(v);
                 userService.getUserWithAuthorities(companyDTO.getUserId())
-                    .ifPresent(x-> companyDTO.setUserName(x.getLastName()+x.getFirstName()));
+                    .ifPresent(x -> companyDTO.setUserName(x.getLogin()));
                 return companyDTO;
             });
     }
@@ -88,8 +92,8 @@ public class CompanyServiceImpl implements CompanyService {
         log.debug("Request to get Company : {}", id);
         Company company = companyRepository.findOne(id);
         CompanyDTO companyDTO = companyMapper.toDto(company);
-        userService.getUserWithAuthorities(companyDTO.getUserId()).ifPresent(v->{
-            companyDTO.setUserName(v.getLastName()+v.getFirstName());
+        userService.getUserWithAuthorities(companyDTO.getUserId()).ifPresent(v -> {
+            companyDTO.setUserName(v.getLogin());
         });
         return companyDTO;
     }
@@ -106,8 +110,8 @@ public class CompanyServiceImpl implements CompanyService {
         log.debug("Request to get Company By UserId: {}", id);
         Company company = companyRepository.findOneByUserId(id);
         CompanyDTO companyDTO = companyMapper.toDto(company);
-        userService.getUserWithAuthorities(companyDTO.getUserId()).ifPresent(v->{
-            companyDTO.setUserName(v.getLastName()+v.getFirstName());
+        userService.getUserWithAuthorities(companyDTO.getUserId()).ifPresent(v -> {
+            companyDTO.setUserName(v.getLogin());
         });
         return companyDTO;
     }
@@ -120,8 +124,17 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Company : {}", id);
+        positionService.deleteByCompanyId(id);
         companyRepository.delete(id);
         companySearchRepository.delete(id);
+    }
+
+    @Override
+    public void deleteByUserId(Long id) {
+        log.debug("Request to delete Company : {}", id);
+        positionService.deleteByCompanyUserId(id);
+        companyRepository.deleteByUserId(id);
+        companySearchRepository.deleteByUserId(id);
     }
 
     /**
@@ -136,10 +149,10 @@ public class CompanyServiceImpl implements CompanyService {
     public Page<CompanyDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Companies for query {}", query);
         Page<Company> result = companySearchRepository.search(queryStringQuery(query), pageable);
-        return result.map(v->{
-            CompanyDTO companyDTO= companyMapper.toDto(v);
+        return result.map(v -> {
+            CompanyDTO companyDTO = companyMapper.toDto(v);
             userService.getUserWithAuthorities(companyDTO.getUserId())
-                .ifPresent(x-> companyDTO.setUserName(x.getLastName()+x.getFirstName()));
+                .ifPresent(x -> companyDTO.setUserName(x.getLogin()));
             return companyDTO;
         });
     }

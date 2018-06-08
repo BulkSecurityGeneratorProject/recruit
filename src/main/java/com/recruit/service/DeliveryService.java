@@ -55,4 +55,7 @@ public interface DeliveryService {
     Page<DeliveryDTO> findAllByUserCompany(Pageable pageable);
 
     Page<DeliveryDTO> findAllByUser(Pageable pageable);
+
+    void deleteByPositionID(Long id);
+    void deleteByUserID(Long id);
 }

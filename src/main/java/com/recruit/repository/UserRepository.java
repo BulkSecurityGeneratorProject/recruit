@@ -46,5 +46,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmail(String email);
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
-    Page<User> findAllByAuthoritiesIsAndLoginNot(Set<Authority> authorities, Pageable pageable, String login);
+    Page<User> findAllByAuthoritiesNotAndLoginNot(Set<Authority> authorities, Pageable pageable, String login);
 }

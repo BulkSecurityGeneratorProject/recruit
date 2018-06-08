@@ -16,4 +16,5 @@ import java.util.List;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
     Company findOneByUserId(Long aLong);
+    void deleteByUserId(Long userId);
 }
